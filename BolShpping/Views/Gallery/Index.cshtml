@@ -1,0 +1,599 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_SecondLayout.cshtml";
+}
+
+<!-- breadcrumb-area start -->
+<div class="breadcrumb-area breadcramb-bg ptb-80">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="breadcrumb-title">Shop</h2>
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Shop</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb-area end -->
+<!-- main-content-warpper start -->
+<div class="main-content-warpper">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="shop-product-wrap pt-80">
+                    <div class="row">
+                        <div class="col">
+                            <!-- shop-top-bar start -->
+                            <div class="shop-top-bar">
+                                <!-- product-short start -->
+                                <div class="shearch-part">
+                                    <div class="product-short" style="margin-bottom: 17px;">
+                                        <p>Category</p>
+                                        <select class="nice-select" name="sortby" style="display: none;">
+                                            <option value="trending">Relevance</option>
+                                            <option value="sales">Name (A - Z)</option>
+                                            <option value="sales">Name (Z - A)</option>
+                                            <option value="rating">Price (Low > High)</option>
+                                            <option value="date">Rating (Lowest)</option>
+                                            <option value="price-asc">Model (A - Z)</option>
+                                            <option value="price-asc">Model (Z - A)</option>
+                                        </select>
+                                    </div>
+                                    <div class="product-short">
+                                        <p>Model</p>
+                                        <select class="nice-select" name="sortby" style="display: none;">
+                                            <option value="trending">Relevance</option>
+                                            <option value="sales">Name (A - Z)</option>
+                                            <option value="sales">Name (Z - A)</option>
+                                            <option value="rating">Price (Low > High)</option>
+                                            <option value="date">Rating (Lowest)</option>
+                                            <option value="price-asc">Model (A - Z)</option>
+                                            <option value="price-asc">Model (Z - A)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="shearch-part">
+                                    <div class="product-short" style="margin-bottom: 17px;">
+                                        <p>Body size</p>
+                                        <select class="nice-select" name="sortby" style="display: none;">
+                                            <option value="trending">Relevance</option>
+                                            <option value="sales">Name (A - Z)</option>
+                                            <option value="sales">Name (Z - A)</option>
+                                            <option value="rating">Price (Low > High)</option>
+                                            <option value="date">Rating (Lowest)</option>
+                                            <option value="price-asc">Model (A - Z)</option>
+                                            <option value="price-asc">Model (Z - A)</option>
+                                        </select>
+                                    </div>
+                                    <div class="product-short">
+                                        <p>Search by price</p>
+                                        <input type="type" name="name" value="" />
+                                    </div>
+                                </div>
+                                <!-- product-short end -->
+                                <!-- product-view-mode start -->
+                                <div class="product-view-mode">
+                                    <p>There are 17 products.</p>
+                                    <!-- shop-item-filter-list start -->
+                                    <ul role="tablist" class="nav shop-item-filter-list">
+                                        <li role="presentation" class="active"><a href="#grid" aria-controls="grid" role="tab" data-toggle="tab" class="active show" aria-selected="true"><i class="fa fa-th"></i> <span>grid</span></a></li>
+                                        <li role="presentation"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="fa fa-th-list"></i> <span>list</span></a></li>
+                                    </ul>
+                                    <!-- shop-item-filter-list end -->
+                                </div>
+                                <!-- product-view-mode end -->
+                            </div>
+                            <!-- shop-top-bar end -->
+                        </div>
+                    </div>
+                    <!-- shop-products-wrapper start -->
+                    <div class="shop-products-wrapper">
+                        <div class="tab-content">
+                            <div id="grid" class="tab-pane fade active show" role="tabpanel">
+                                <div class="shop-product-wrap">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap mt-30">
+                                                <div class="product-thumbnail">
+                                                    <a href="single-product.html">
+                                                        <img class="first-image" src="~/~/img/product/5.jpg" alt="">
+                                                    </a>
+                                                    <span class="label-sale">new</span>
+                                                    <div class="product-action">
+                                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <h3 class="product-name"><a href="single-product.html">venenatis</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="old-price">$212.00</span>
+                                                        <span class="new-price">$209.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap mt-30">
+                                                <div class="product-thumbnail">
+                                                    <a href="single-product.html">
+                                                        <img class="first-image" src="~/img/product/6.jpg" alt="">
+                                                        <img class="second-image" src="~/img/product/1.jpg" alt="">
+                                                    </a>
+                                                    <span class="label-sale">new</span>
+                                                    <div class="product-action">
+                                                        <a href="#" class="add-to-cart-btn"><i class="fas fa-cart-plus"></i></a>
+                                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-search-plus"></i></a>
+                                                        <a href="single-product.html" class="links-details"><i class="far fa-grin-hearts"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <h3 class="product-name"><a href="single-product.html">tincidunt nunc</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="new-price">$68.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap mt-30">
+                                                <div class="product-thumbnail">
+                                                    <a href="single-product.html">
+                                                        <img class="first-image" src="~/img/product/7.jpg" alt="">
+                                                    </a>
+                                                    <span class="label-sale">new</span>
+                                                    <div class="product-action">
+                                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <h3 class="product-name"><a href="single-product.html">venenatis</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="old-price">$212.00</span>
+                                                        <span class="new-price">$209.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap mt-30">
+                                                <div class="product-thumbnail">
+                                                    <a href="single-product.html">
+                                                        <img class="first-image" src="~/img/product/1.jpg" alt="">
+                                                    </a>
+                                                    <span class="label-sale">new</span>
+                                                    <div class="product-action">
+                                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <h3 class="product-name"><a href="single-product.html">malesuada fames</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="old-price">$112.00</span>
+                                                        <span class="new-price">$104.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap mt-30">
+                                                <div class="product-thumbnail">
+                                                    <a href="single-product.html">
+                                                        <img class="first-image" src="~/img/product/2.jpg" alt="">
+                                                    </a>
+                                                    <span class="label-sale">new</span>
+                                                    <div class="product-action">
+                                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <h3 class="product-name"><a href="single-product.html">imperdiet vel</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="old-price">$68.00</span>
+                                                        <span class="new-price">$46.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap mt-30">
+                                                <div class="product-thumbnail">
+                                                    <a href="single-product.html">
+                                                        <img class="first-image" src="~/img/product/9.jpg" alt="">
+                                                    </a>
+                                                    <span class="label-sale">new</span>
+                                                    <div class="product-action">
+                                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <h3 class="product-name"><a href="single-product.html">convallis sem</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="old-price">$512.00</span>
+                                                        <span class="new-price">$309.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap mt-30">
+                                                <div class="product-thumbnail">
+                                                    <a href="single-product.html">
+                                                        <img class="first-image" src="~/img/product/8.jpg" alt="">
+                                                    </a>
+                                                    <span class="label-sale">new</span>
+                                                    <div class="product-action">
+                                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <h3 class="product-name"><a href="single-product.html">Curabitur non</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="old-price">$218.00</span>
+                                                        <span class="new-price">$213.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap mt-30">
+                                                <div class="product-thumbnail">
+                                                    <a href="single-product.html">
+                                                        <img class="first-image" src="~/img/product/11.jpg" alt="">
+                                                        <img class="second-image" src="~/img/product/3.jpg" alt="">
+                                                    </a>
+                                                    <span class="label-sale">new</span>
+                                                    <div class="product-action">
+                                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <h3 class="product-name"><a href="single-product.html">Habitant phasellus</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="new-price">$68.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap mt-30">
+                                                <div class="product-thumbnail">
+                                                    <a href="single-product.html">
+                                                        <img class="first-image" src="~/img/product/12.jpg" alt="">
+                                                    </a>
+                                                    <span class="label-sale">new</span>
+                                                    <div class="product-action">
+                                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <h3 class="product-name"><a href="single-product.html">venenatis</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="old-price">$22.00</span>
+                                                        <span class="new-price">$20.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap mt-30">
+                                                <div class="product-thumbnail">
+                                                    <a href="single-product.html">
+                                                        <img class="first-image" src="~/img/product/4.jpg" alt="">
+                                                    </a>
+                                                    <span class="label-sale">new</span>
+                                                    <div class="product-action">
+                                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <h3 class="product-name"><a href="single-product.html">malesuada fames</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="old-price">$212.00</span>
+                                                        <span class="new-price">$209.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap mt-30">
+                                                <div class="product-thumbnail">
+                                                    <a href="single-product.html">
+                                                        <img class="first-image" src="~/img/product/1.jpg" alt="">
+                                                        <img class="second-image" src="~/img/product/2.jpg" alt="">
+                                                    </a>
+                                                    <span class="label-sale">new</span>
+                                                    <div class="product-action">
+                                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <h3 class="product-name"><a href="single-product.html">tincidunt nunc</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="new-price">$97.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-6">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap mt-30">
+                                                <div class="product-thumbnail">
+                                                    <a href="single-product.html">
+                                                        <img class="first-image" src="~/img/product/14.jpg" alt="">
+                                                    </a>
+                                                    <span class="label-sale">new</span>
+                                                    <div class="product-action">
+                                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content text-center">
+                                                    <h3 class="product-name"><a href="single-product.html">Curabitur non</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="old-price">$212.00</span>
+                                                        <span class="new-price">$209.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="list" class="tab-pane fade" role="tabpanel">
+                                <!-- shop-product-list-wrap start -->
+                                <div class="shop-product-list-wrap">
+                                    <!-- product-layout-list start -->
+                                    <div class="row product-layout-list">
+                                        <div class="col-lg-4 col-md-6">
+                                            <!-- product-thumbnail start -->
+                                            <div class="product-thumbnail">
+                                                <a href="single-product.html">
+                                                    <img class="first-image" src="~/img/product/5.jpg" alt="">
+                                                </a>
+                                                <span class="label-sale">new</span>
+                                                <div class="product-action">
+                                                    <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                    <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                    <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                </div>
+                                            </div>
+                                            <!-- product-thumbnail end -->
+                                        </div>
+                                        <div class="col-lg-8 col-md-6">
+                                            <!-- product-content start -->
+                                            <div class="product-content">
+                                                <h3 class="product-name"><a href="single-product.html">tincidunt nunc</a></h3>
+                                                <div class="price-box">
+                                                    <span class="old-price">$212.00</span>
+                                                    <span class="new-price">$209.00</span>
+                                                </div>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod lorem solo tempor incididunt ut labore et dolore magna aliqua. Elementum hendrerit per a sed lacinia parturient sem libero
+                                                    iaculis faucibus penatibus condimentum a a. Blandit vel eros condimentum ullamcorper condimentum sem cubilia. Aculis faucibus penatibus condimentum. 60% Ultrices & 40% Commodo. Ullamcorper condimentum
+                                                    sem.
+                                                </p>
+                                            </div>
+                                            <!-- product-content end -->
+                                        </div>
+                                    </div>
+                                    <!-- product-layout-list end -->
+                                    <!-- product-layout-list start -->
+                                    <div class="row product-layout-list">
+                                        <div class="col-lg-4 col-md-6">
+                                            <!-- product-thumbnail start -->
+                                            <div class="product-thumbnail">
+                                                <a href="single-product.html">
+                                                    <img class="first-image" src="~/img/product/6.jpg" alt="">
+                                                </a>
+                                                <span class="label-sale">new</span>
+                                                <div class="product-action">
+                                                    <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                    <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                    <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                </div>
+                                            </div>
+                                            <!-- product-thumbnail end -->
+                                        </div>
+                                        <div class="col-lg-8 col-md-6">
+                                            <!-- product-content start -->
+                                            <div class="product-content">
+                                                <h3 class="product-name"><a href="single-product.html">consequat lacus</a></h3>
+                                                <div class="price-box">
+                                                    <span class="old-price">$312.00</span>
+                                                    <span class="new-price">$309.00</span>
+                                                </div>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod lorem solo tempor incididunt ut labore et dolore magna aliqua. Elementum hendrerit per a sed lacinia parturient sem libero
+                                                    iaculis faucibus penatibus condimentum a a. Blandit vel eros condimentum ullamcorper condimentum sem cubilia. Aculis faucibus penatibus condimentum. 60% Ultrices & 40% Commodo. Ullamcorper condimentum
+                                                    sem.
+                                                </p>
+                                            </div>
+                                            <!-- product-content end -->
+                                        </div>
+                                    </div>
+                                    <!-- product-layout-list end -->
+                                    <!-- product-layout-list start -->
+                                    <div class="row product-layout-list">
+                                        <div class="col-lg-4 col-md-6">
+                                            <!-- product-thumbnail start -->
+                                            <div class="product-thumbnail">
+                                                <a href="single-product.html">
+                                                    <img class="first-image" src="~/img/product/8.jpg" alt="">
+                                                </a>
+                                                <span class="label-sale">new</span>
+                                                <div class="product-action">
+                                                    <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                    <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                    <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                </div>
+                                            </div>
+                                            <!-- product-thumbnail end -->
+                                        </div>
+                                        <div class="col-lg-8 col-md-6">
+                                            <!-- product-content start -->
+                                            <div class="product-content">
+                                                <h3 class="product-name"><a href="single-product.html">malesuada fames</a></h3>
+                                                <div class="price-box">
+                                                    <span class="old-price">$170.00</span>
+                                                    <span class="new-price">$147.00</span>
+                                                </div>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod lorem solo tempor incididunt ut labore et dolore magna aliqua. Elementum hendrerit per a sed lacinia parturient sem libero
+                                                    iaculis faucibus penatibus condimentum a a. Blandit vel eros condimentum ullamcorper condimentum sem cubilia. Aculis faucibus penatibus condimentum. 60% Ultrices & 40% Commodo. Ullamcorper condimentum
+                                                    sem.
+                                                </p>
+                                            </div>
+                                            <!-- product-content end -->
+                                        </div>
+                                    </div>
+                                    <!-- product-layout-list end -->
+                                    <!-- product-layout-list start -->
+                                    <div class="row product-layout-list">
+                                        <div class="col-lg-4 col-md-6">
+                                            <!-- product-thumbnail start -->
+                                            <div class="product-thumbnail">
+                                                <a href="single-product.html">
+                                                    <img class="first-image" src="~/img/product/9.jpg" alt="">
+                                                </a>
+                                                <span class="label-sale">new</span>
+                                                <div class="product-action">
+                                                    <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                    <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                    <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                </div>
+                                            </div>
+                                            <!-- product-thumbnail end -->
+                                        </div>
+                                        <div class="col-lg-8 col-md-6">
+                                            <!-- product-content start -->
+                                            <div class="product-content">
+                                                <h3 class="product-name"><a href="single-product.html">Curabitur non</a></h3>
+                                                <div class="price-box">
+                                                    <span class="old-price">$132.00</span>
+                                                    <span class="new-price">$109.00</span>
+                                                </div>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod lorem solo tempor incididunt ut labore et dolore magna aliqua. Elementum hendrerit per a sed lacinia parturient sem libero
+                                                    iaculis faucibus penatibus condimentum a a. Blandit vel eros condimentum ullamcorper condimentum sem cubilia. Aculis faucibus penatibus condimentum. 60% Ultrices & 40% Commodo. Ullamcorper condimentum
+                                                    sem.
+                                                </p>
+                                            </div>
+                                            <!-- product-content end -->
+                                        </div>
+                                    </div>
+                                    <!-- product-layout-list end -->
+                                    <!-- product-layout-list start -->
+                                    <div class="row product-layout-list">
+                                        <div class="col-lg-4 col-md-6">
+                                            <!-- product-thumbnail start -->
+                                            <div class="product-thumbnail">
+                                                <a href="single-product.html">
+                                                    <img class="first-image" src="~/img/product/10.jpg" alt="">
+                                                </a>
+                                                <span class="label-sale">new</span>
+                                                <div class="product-action">
+                                                    <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                    <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                    <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                </div>
+                                            </div>
+                                            <!-- product-thumbnail end -->
+                                        </div>
+                                        <div class="col-lg-8 col-md-6">
+                                            <!-- product-content start -->
+                                            <div class="product-content">
+                                                <h3 class="product-name"><a href="single-product.html">venenatis</a></h3>
+                                                <div class="price-box">
+                                                    <span class="old-price">$192.00</span>
+                                                    <span class="new-price">$189.00</span>
+                                                </div>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod lorem solo tempor incididunt ut labore et dolore magna aliqua. Elementum hendrerit per a sed lacinia parturient sem libero
+                                                    iaculis faucibus penatibus condimentum a a. Blandit vel eros condimentum ullamcorper condimentum sem cubilia. Aculis faucibus penatibus condimentum. 60% Ultrices & 40% Commodo. Ullamcorper condimentum
+                                                    sem.
+                                                </p>
+                                            </div>
+                                            <!-- product-content end -->
+                                        </div>
+                                    </div>
+                                    <!-- product-layout-list end -->
+                                </div>
+                                <!-- shop-product-list-wrap end -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- shop-products-wrapper end -->
+                    <div class="paginatoin-area">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <p>Showing 10-13 of 13 item(s) </p>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <ul class="pagination-box">
+                                    <li>
+                                        <a href="#" class="Previous"><i class="fa fa-angle-left"></i> Previous</a>
+                                    </li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li>
+                                        <a href="#" class="Next"> Next <i class="fa fa-angle-right"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- main-content-warpper end -->
