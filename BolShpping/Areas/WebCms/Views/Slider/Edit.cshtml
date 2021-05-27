@@ -1,0 +1,54 @@
+﻿@model BolShpping.Models.BLL.Slider
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-6 my-4 mx-auto">
+        <div class="card shadow my-4">
+            <div class="card-header py-4">
+                Update <a asp-action="Index" class="float-right btn btn-outline-secondary">Back to Index</a>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-row">
+                        <div class="col-md-12 my-3">
+                            <fieldset class="radiogenel">
+                                <legend>Resim ve Url</legend>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="addnae">Resim Dosyası</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="file" name="file" aria-describedby="addnae" accept=".jpeg, .png, .jpg">
+                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                </div>
+                                <div class="img my-3">
+                                    <img src="~/img/@Model.ImageCode" style=" width: 500px; height: 380px;" />
+                                </div>
+
+                            </fieldset>
+                        </div>
+                    </div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="ImageCode" />                                                               s
+                    <div class="form-group">
+                        <input type="submit" value="Ekle" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

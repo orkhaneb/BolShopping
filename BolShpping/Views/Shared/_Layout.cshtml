@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="~/css/mainmenu.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <!-- Style CSS hear -->
+
     <link rel="stylesheet" href="~/style.css">
     <link rel="stylesheet" href="~/css/responsive.css">
     <script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -50,36 +51,39 @@
                                                 <li><a href="~/#"><img src="~/img/icon/2.jpg" alt=""> Français</a></li>
                                             </ul>
                                         </li>
-                                        <li class="drodown-show">
-                                            <a href="~/#">USD <i class="fa fa-angle-down"></i></a>
-                                            <ul class="open-dropdown">
-                                                <li><a href="~/#">Euro €</a></li>
-                                                <li class="active"><a href="~/#">USD $</a></li>
-                                            </ul>
-                                        </li>
+                                       
                                     </ul>
                                 </div>
                                 <!-- language-currency-wrapper end -->
-                                <!-- top-social-warraper start -->
-                                <div class="top-social-warraper">
-                                    <ul>
-                                        <li><a href="~/#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="~/#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="~/#"><i class="fab fa-youtube"></i></a></li>
-                                        <li><a href="~/#"><i class="fab fa-google-plus-g"></i></a></li>
-                                        <li><a href="~/#"><i class="fab fa-instagram"></i></a></li>
-                                    </ul>
-                                </div>
-                                <!-- top-social-warraper end -->
+                               
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <!-- user-info-top start-->
                             <div class="user-info-top">
                                 <ul>
-                                    <li><a href="~/my-account.html"><i class="fa fa-user"></i>My account</a></li>
-                                    <li><a href="~/checkout.html"><i class="fa fa-check-circle"></i>Checkout</a></li>
-                                    <li><a href="~/login-register.html"><i class="fa fa-key"></i>Sign in</a></li>
+                                  
+                                    <li class="top_links">
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                              <a style="color:white;">Welcome @User.Identity.Name </a> 
+                                        }
+                                            else
+                                            {
+                                               <a asp-controller="Account" asp-action="Signin"><i class="fa fa-key"> Sign In </i></a>
+                                            }
+                                    </li>
+                                    <li class="top_links">
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                                 <a asp-controller="Account" asp-action="Signout">Signout </a>
+                                         }
+                                            else
+                                            {
+                                                <a asp-controller="Account" asp-action="Register"><i class="fa fa-key">Register </i></a>
+                                            }
+
+                                    </li>
                                 </ul>
                             </div>
                             <!-- user-info-top end -->
