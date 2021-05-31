@@ -564,7 +564,7 @@ namespace BolShpping.Migrations
             modelBuilder.Entity("BolShpping.Models.BLL.ProductImage", b =>
                 {
                     b.HasOne("BolShpping.Models.BLL.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

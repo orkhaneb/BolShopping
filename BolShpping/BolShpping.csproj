@@ -19,8 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\WebCms\Data\" />
-    <Folder Include="Areas\WebCms\Models\" />
     <Folder Include="wwwroot\admin\" />
     <Folder Include="wwwroot\img\category\" />
     <Folder Include="wwwroot\img\register\" />

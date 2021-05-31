@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BolShpping.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210521102834_initial_V1")]
-    partial class initial_V1
+    [Migration("20210527203050_initial_V3")]
+    partial class initial_V3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -566,7 +566,7 @@ namespace BolShpping.Migrations
             modelBuilder.Entity("BolShpping.Models.BLL.ProductImage", b =>
                 {
                     b.HasOne("BolShpping.Models.BLL.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

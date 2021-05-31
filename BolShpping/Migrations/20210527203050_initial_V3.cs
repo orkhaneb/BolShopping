@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BolShpping.Migrations
 {
-    public partial class initial_V1 : Migration
+    public partial class initial_V3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

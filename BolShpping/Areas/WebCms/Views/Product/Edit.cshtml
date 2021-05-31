@@ -1,0 +1,110 @@
+﻿@model BolShpping.Models.VM.ViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow my-4">
+            <div class="card-header py-4">
+                Update Product <a asp-action="Index" class="float-right btn btn-outline-secondary">Back to Index</a>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <fieldset class="radiogenel">
+                                <legend>Add Image</legend>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="image">image</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="hidden" name="category" value="">
+                                        <input type="file" class="custom-file-input imginput" id="image1" multiple name="File" onchange="previewFile()">
+                                        <label class="custom-file-label" for="category">Choose file</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-5">
+                                    @foreach (var item in Model.ProductImages)
+                                    {
+                                    <img src="~/img/@item.ImageCode" id="img1" height="300" style="margin-bottom: 20px;" alt="no  image">
+                                    }
+
+                                </div>
+                            </fieldset>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Marka</label>
+                                <select class="form-control select-category" asp-items="@Model.CategoryName" asp-for="@Model.Category.Id" id="exampleFormControlSelect1">
+                                    <option value="0">Select</option>
+
+                                </select>
+                                <input type="hidden" id="categoryNameHidden" name="Category" />
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.Name" class="control-label"></label>
+                                <input type="text" asp-for="@Model.Product.Name" id="Name" class="form-control" />
+                                <span name="@Model.Product.Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.Description" class="control-label"></label>
+                                <textarea asp-for="@Model.Product.Description" id="Name" class="form-control" style="height:140px;"></textarea>
+                                <span asp-validation-for="@Model.Product.Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.Price" class="control-label"></label>
+                                <input type="text" asp-for="@Model.Product.Price" id="Name" class="form-control" />
+                                <span asp-validation-for="@Model.Product.Price" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.Product.DiscountPrice" class="control-label"></label>
+                                <input type="text" asp-for="@Model.Product.DiscountPrice" id="Name" class="form-control" />
+                                <span asp-validation-for="@Model.Product.DiscountPrice" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Color</label>
+                                <select class="form-control  product-color" asp-items="Html.GetEnumSelectList<BolShpping.Models.Enum.ColorProduct>()" asp-for="@Model.Product.Color">
+                                    <option value=""> @Html.DisplayFor(modelItem => Model.Product.Color)</option>
+                                </select>
+                                <input type="hidden" id="hidden-color" name="ProductColor" />
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Size</label>
+                                <select class="form-control product-size" asp-items="Html.GetEnumSelectList<BolShpping.Models.Enum.SizeProduct>()" asp-for="@Model.Product.Size">
+                                    <option value="">  @Html.DisplayFor(modelItem => Model.Product.Size)</option>
+                                </select>
+                                <input type="hidden" id="hidden-size" name="ProductSize" />
+                            </div>
+
+                        </div>
+                        <input type="hidden" asp-for="@Model.Product.Id" />
+                        <div class="form-group">
+                            <input type="submit" value="Update" id="btnAddModels" class="btn btn-success name" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    $(document).on("change", ".product-size", function () {
+        $("#hidden-size").val(this.options[this.selectedIndex].text)
+    })
+
+    $(document).on("change", ".product-color", function () {
+        $("#hidden-color").val(this.options[this.selectedIndex].text)
+    })
+</script>
