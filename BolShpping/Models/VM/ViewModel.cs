@@ -15,6 +15,7 @@ namespace BolShpping.Models.VM
         public IEnumerable<ProductImage> ProductImages { get; set; }
         public ProductImage ProductImage { get; set; }
         public Category Category { get; set; }
+
         public IEnumerable<Category> Categories { get; set; }
         public IEnumerable<SelectListItem> CategoryName { get; set; }
         public string ProductSize { get; set; }

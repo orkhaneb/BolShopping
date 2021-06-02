@@ -59,9 +59,9 @@ namespace BolShpping.Areas.WebCms.Controllers
                     Color = viewModel.ProductColor,
                     Size = viewModel.ProductSize,
                     DiscountPrice = viewModel.Product.DiscountPrice,
-                    Price = viewModel.Product.Price
-                    
+                    Price = viewModel.Product.Price,
                 };
+
                 await _context.Products.AddAsync(model);
 
                 await _context.SaveChangesAsync();
@@ -74,6 +74,7 @@ namespace BolShpping.Areas.WebCms.Controllers
                         ProductId = model.Id,
                         ImageCode = image
                     });
+
                     await _context.SaveChangesAsync();
                 }
 

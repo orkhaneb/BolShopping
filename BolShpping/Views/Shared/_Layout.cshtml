@@ -51,37 +51,37 @@
                                                 <li><a href="~/#"><img src="~/img/icon/2.jpg" alt=""> Français</a></li>
                                             </ul>
                                         </li>
-                                       
+
                                     </ul>
                                 </div>
                                 <!-- language-currency-wrapper end -->
-                               
+
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <!-- user-info-top start-->
                             <div class="user-info-top">
                                 <ul>
-                                  
+
                                     <li class="top_links">
                                         @if (User.Identity.IsAuthenticated)
                                         {
-                                              <a style="color:white;">Welcome @User.Identity.Name </a> 
+                                            <a style="color:white;">Welcome @User.Identity.Name </a>
                                         }
-                                            else
-                                            {
-                                               <a asp-controller="Account" asp-action="Signin"><i class="fa fa-key"> Sign In </i></a>
-                                            }
+                                        else
+                                        {
+                                            <a asp-controller="Account" asp-action="Signin"><i class="fa fa-key"> Sign In </i></a>
+                                        }
                                     </li>
                                     <li class="top_links">
                                         @if (User.Identity.IsAuthenticated)
                                         {
-                                                 <a asp-controller="Account" asp-action="Signout">Signout </a>
-                                         }
-                                            else
-                                            {
-                                                <a asp-controller="Account" asp-action="Register"><i class="fa fa-key">Register </i></a>
-                                            }
+                                            <a asp-controller="Account" asp-action="Signout">Signout </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Account" asp-action="Register"><i class="fa fa-key">Register </i></a>
+                                        }
 
                                     </li>
                                 </ul>
@@ -428,92 +428,7 @@
             </div>
         </footer>
         <!-- footer-area end -->
-        <!-- Modal-wrapper start -->
-        <div class="modal-wrapper">
-            <div class="modal fade " id="exampleModalCenter">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <!-- modal-inner-area start -->
-                            <div class="modal-inner-area row">
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="product-thumbnail">
-                                        <div class="tab-content large-thum-image">
-                                            <div role="tabpanel" class="tab-pane active" id="Thumb1">
-                                                <img src="~/img/product/larg-1.jpg" alt="">
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="Thumb2">
-                                                <img src="~/img/product/larg-2.jpg" alt="">
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="Thumb3">
-                                                <img src="~/img/product/larg-3.jpg" alt="">
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="Thumb4">
-                                                <img src="~/img/product/larg-4.jpg" alt="">
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="Thumb5">
-                                                <img src="~/img/product/larg-5.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-product-tab">
-                                        <ul class="nav product-small-thum slider-vertical">
-                                            <li role="presentation" class="active"><a href="~/#Thumb1" data-toggle="tab"><img src="~/img/product/1.jpg" alt=""></a></li>
-                                            <li role="presentation"><a href="~/#Thumb2" data-toggle="tab"><img src="~/img/product/2.jpg" alt=""></a></li>
-                                            <li role="presentation"><a href="~/#Thumb3" data-toggle="tab"><img src="~/img/product/3.jpg" alt=""></a></li>
-                                            <li role="presentation"><a href="~/#Thumb4" data-toggle="tab"><img src="~/img/product/4.jpg" alt=""></a></li>
-                                            <li role="presentation"><a href="~/#Thumb5" data-toggle="tab"><img src="~/img/product/5.jpg" alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <!-- quick-view-content start -->
-                                    <div class="quick-view-content">
-                                        <div class="product-info">
-                                            <h2>imperdiet vel</h2>
-                                            <div class="price-box">
-                                                <span class="new-price">$25.50</span>
-                                                <span class="old-price">$30.50</span>
-                                            </div>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod lorem solo tempor incididunt ut labore et dolore magna aliqua. Elementum hendrerit per a sed lacinia parturient sem libero iaculis faucibus
-                                                penatibus condimentum a a. Blandit vel eros condimentum ullamcorper condimentum sem cubilia. Aculis faucibus penatibus condimentum. 60% Ultrices & 40% Commodo. Ullamcorper condimentum sem.
-                                            </p>
-                                            <form class="modal-cart">
-                                                <div class="quantity">
-                                                    <label>Quantity</label>
-                                                    <div class="cart-plus-minus">
-                                                        <input class="cart-plus-minus-box" type="text" value="0">
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            <div class="quick-add-to-cart">
-                                                <button class="quick-add-to-btn">Add to cart</button>
-                                            </div>
-                                        </div>
-                                        <div class="social-sharing">
-                                            <h4>Share</h4>
-                                            <ul>
-                                                <li class="facebook"><a target="_blank" href="~/#"><i class="fa fa-facebook"></i></a></li>
-                                                <li class="twitter"><a target="_blank" href="~/#"><i class="fa fa-twitter"></i></a></li>
-                                                <li class="googleplus"><a target="_blank" href="~/#"><i class="fa fa-google-plus"></i></a></li>
-                                                <li class="pinterest"><a target="_blank" href="~/#"><i class="fa fa-pinterest"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- quick-view-content end -->
-                                </div>
-                            </div>
-                            <!-- modal-inner-area end -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal-wrapper end -->
+
 
 
 
