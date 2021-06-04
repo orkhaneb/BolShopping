@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BolShpping.Models.BLL;
 using BolShpping.Models.DAL;
 using BolShpping.Models.VM;
 using Microsoft.AspNetCore.Mvc;
@@ -43,11 +44,26 @@ namespace BolShpping.Controllers
                 });
             }
 
-            var category = await _context.Categories.FindAsync(categoryID);
-            var size = _context.Products.Find(sizeID).Size;
+            List<Product> filter = null;
 
-            var filter = await _context.Products.Where(p => p.CategoryId == category.Id && p.Size == size).ToListAsync();
 
+            var category = await _context.Categories.Where(c => c.Id == categoryID).FirstOrDefaultAsync();
+            var size = _context.Products.Where(p => p.Id == sizeID).FirstOrDefault();
+            
+            if (category == null)
+            {
+                filter = await _context.Products.Where(p => p.Size == size.Size).ToListAsync();
+            }
+
+            if (size == null)
+            {
+                filter = await _context.Products.Where(p => p.CategoryId == category.Id).ToListAsync();
+            }
+
+            if (category != null && size != null)
+            {
+                filter = await _context.Products.Where(p => p.CategoryId == category.Id && p.Size == size.Size).ToListAsync();
+            }
 
 
             return Json(new
