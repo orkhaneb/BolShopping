@@ -29,7 +29,8 @@ namespace BolShpping.Areas.WebCms.Controllers
         // Product Index Function Start
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.Include(i=>i.ProductImages).Include(c => c.Category).ToListAsync());
+            var product = await _context.Products.Include(i => i.ProductImages).Include(c => c.Category).ToListAsync();
+            return View(product);
         }
         // Product Index Function End
 

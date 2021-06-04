@@ -170,12 +170,12 @@
                                             <span class="label-sale">new</span>
                                             <div class="product-action">
                                                 <a href="#" class="add-to-cart-btn"><i class="icon fas fa-cart-plus"></i></a>
-                                                <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter@(productCount)"><i class="ion-search"></i></a>
+                                                <a href="#" class="quick-view" ><i class="far fa-heart"></i></a>
                                                 <a href="#" class="links-details"><i class="ion-clipboard"></i></a>
                                             </div>
                                         </div>
                                         <div class="product-content text-center">
-                                            <h3 class="product-name"><a href="#">@item.Name</a></h3>
+                                            <h3 class="product-name"><a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">@item.Name</a></h3>
                                             <div class="price-box">
                                                 <span class="old-price">$@item.DiscountPrice</span>
                                                 <span class="new-price">$@item.Price</span>
@@ -184,16 +184,16 @@
                                     </div>
 
                                     <!-- Modal-wrapper start -->
-                                    <div class="modal-wrapper">
+                                    <!--<div class="modal-wrapper">
                                         <div class="modal fade " id="exampleModalCenter@(productCount)">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
-                                                        </button>
+                                                        </button>-->
                                                         <!-- modal-inner-area start -->
-                                                        <div class="modal-inner-area row">
+                                                        <!--<div class="modal-inner-area row">
                                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                                 <div class="product-thumbnail">
                                                                     <div class="tab-content large-thum-image">
@@ -224,9 +224,9 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="col-lg-6 col-md-6 col-sm-12">-->
                                                                 <!-- quick-view-content start -->
-                                                                <div class="quick-view-content">
+                                                                <!--<div class="quick-view-content">
                                                                     <div class="product-info">
                                                                         <h2>@item.Name</h2>
                                                                         <div class="price-box">
@@ -257,16 +257,16 @@
                                                                             <li class="pinterest"><a target="_blank" href="~/#"><i class="fa fa-pinterest"></i></a></li>
                                                                         </ul>
                                                                     </div>
-                                                                </div>
+                                                                </div>-->
                                                                 <!-- quick-view-content end -->
-                                                            </div>
-                                                        </div>
+                                                            <!--</div>
+                                                        </div>-->
                                                         <!-- modal-inner-area end -->
-                                                    </div>
+                                                    <!--</div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <!-- Modal-wrapper end -->
 
                                 }
@@ -464,50 +464,3 @@
 <!-- latest-blog-area end -->
 
 
-@section Scripts{
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        $(document).on("click", ".quick-add-to-btn", function () {
-            console.log($(this)[0].id)
-        })
-
-
-        $(document).on("click", ".quick-add-to-btn", function (e) {
-            let id = $(this)[0].id;
-            console.log(id)
-            let quantity = $(".cart-plus-minus-box").val();
-            console.log(quantity)
-
-
-            $.ajax({
-                url: "/Home/AddBasket/",
-                method: "POST",
-                data: { id: id, quantity: quantity },
-                dataType: "json",
-                success: function myfunction(response) {
-                    console.log(response.status)
-
-                    if (response.status === 200) {
-                        swal({
-                            title: "Basket",
-                            text: "Məhsulunuz səbətiniz-ə əlavə olundu",
-                            icon: "success",
-                        });
-                        setTimeout(function () { location.reload(); }, 1700);
-
-                    }
-                    else if (response.status === 404) {
-                        swal({
-                            title: "Basket",
-                            text: "Bu Məhsul artıq səbətinizdə var",
-                            icon: "warning",
-                        });
-                    }
-
-                }
-
-            })
-        })
-    </script>
-    @*.data("productId")*@
-}

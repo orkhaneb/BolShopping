@@ -36,47 +36,7 @@ namespace BolShpping.Controllers
             return View(vm);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddBasket(int id, int quantity)
-        {
-            Cart cart = null;
-            if (id != 0)
-            {
-                var carts = await _context.Carts.ToListAsync();
-
-                foreach (var item in carts)
-                {
-                    if (item.ProductId == id)
-                    {
-                        return Json(new
-                        {
-                            status = 404,
-                            basket = item
-                        });
-                    }
-                }
-                var product = await _context.Products.FindAsync(id);
-                var productQuantity = quantity * product.Price;
-                cart = new Cart()
-                {
-                    Product = product,
-                    ProductId = id,
-                    Quantity = quantity,
-                    SubTotalPrice = productQuantity
-                };
-                await _context.Carts.AddAsync(cart);
-                await _context.SaveChangesAsync();
-            }
-
-            return Json(
-                new
-                {
-                    basket = cart,
-                    status = 200
-
-                }
-            );
-        }
+        
 
         public IActionResult Privacy()
         {
