@@ -48,6 +48,7 @@ namespace BolShpping.Controllers
                 return View(registerModel);
             }
             AppUser user = registerModel;
+            user.Name = registerModel.Name;
 
             IdentityResult result = await _userManager.CreateAsync(user, registerModel.Password);
 

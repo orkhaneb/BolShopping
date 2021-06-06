@@ -32,11 +32,10 @@ namespace BolShpping.Controllers
             return View(vm);
         }
 
-        [HttpPost]
-        public async Task<JsonResult> Filter(int categoryID, int sizeID)
+        [HttpGet]
+        public async Task<JsonResult> Filter(int id, int sizeID, int fromPrice, int toPrice)
         {
-
-            if (categoryID == 0 && sizeID == 0)
+            if (id == 0 && sizeID == 0)
             {
                 return Json(new
                 {
@@ -46,30 +45,51 @@ namespace BolShpping.Controllers
 
             List<Product> filter = null;
 
-
-            var category = await _context.Categories.Where(c => c.Id == categoryID).FirstOrDefaultAsync();
+            var category = await _context.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
             var size = _context.Products.Where(p => p.Id == sizeID).FirstOrDefault();
-            
+
+            var productImages = await _context.ProductImages.ToListAsync() ;
+
+
             if (category == null)
             {
-                filter = await _context.Products.Where(p => p.Size == size.Size).ToListAsync();
+                filter = await _context.Products.Where(p => p.Size == size.Size &&
+                                         ((fromPrice != 0 && p.Price >= fromPrice && toPrice == 0) ||
+                                          (toPrice != 0 && p.Price <= toPrice && fromPrice == 0) ||
+                                          (toPrice == 0 && fromPrice == 0) ||
+                                          (fromPrice != 0 && toPrice != 0 && p.Price >= fromPrice && p.Price <= toPrice))).ToListAsync();
             }
 
             if (size == null)
             {
-                filter = await _context.Products.Where(p => p.CategoryId == category.Id).ToListAsync();
+                filter = await _context.Products.Where(
+                    
+                    p => (p.CategoryId == category.Id) &&
+                                         ((fromPrice != 0 && p.Price >= fromPrice && toPrice == 0) ||
+                                          (toPrice != 0 && p.Price <= toPrice && fromPrice == 0) ||
+                                          (toPrice == 0 && fromPrice == 0) ||
+                                          (fromPrice != 0 && toPrice != 0 && p.Price >= fromPrice && p.Price <= toPrice))).ToListAsync();
             }
 
             if (category != null && size != null)
             {
-                filter = await _context.Products.Where(p => p.CategoryId == category.Id && p.Size == size.Size).ToListAsync();
+                filter = await _context.Products.Where(
+                    
+                                    p => (p.CategoryId == category.Id && p.Size == size.Size) &&
+                                         ((fromPrice != 0 && p.Price >= fromPrice && toPrice == 0) ||
+                                          (toPrice != 0 && p.Price <= toPrice && fromPrice == 0) ||
+                                          (toPrice == 0 && fromPrice == 0) ||
+                                          (fromPrice != 0 && toPrice != 0 && p.Price >= fromPrice && p.Price <= toPrice))) 
+                                                                                                        .ToListAsync();
             }
 
 
             return Json(new
             {
                 status = 200,
-                filterInfo = filter
+                filterInfo = filter,
+
+                productImages = productImages
 
             });
         }

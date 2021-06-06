@@ -66,15 +66,20 @@ namespace BolShpping.Areas.WebCms.Controllers
                 await _context.Products.AddAsync(model);
 
                 await _context.SaveChangesAsync();
-
+                int count = 0;
                 foreach (var item in files)
                 {
-                    var image = await ImagesHelpers.ImageUploadAsync(_env.WebRootPath,item, "img", "product");
+                    var image = await ImagesHelpers.ImageUploadAsync(_env.WebRootPath, item, "img", "product");
                     await _context.ProductImages.AddAsync(new ProductImage
                     {
                         ProductId = model.Id,
                         ImageCode = image
                     });
+                    if (count < files.Count())
+                    {
+                        model.ProductImages[count].ImageCode = image;
+                        ++count;
+                    }    
 
                     await _context.SaveChangesAsync();
                 }

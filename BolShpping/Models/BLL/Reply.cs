@@ -12,10 +12,16 @@ namespace BolShpping.Models.BLL
         public string Email { get; set; }
         public string Website { get; set; }
         public string Message { get; set; }
+        public DateTime DateTime { get; set; }
+
 
         //foreign key connection
         public int CommentId { get; set; }
-        
+
+        public AppUser AppUser { get; set; }
+
+        public string AppUserId { get; set; }
+
         public virtual Comment Comment { get; set; }
     }
 }

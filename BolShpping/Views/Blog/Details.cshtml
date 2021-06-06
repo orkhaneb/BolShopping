@@ -1,4 +1,5 @@
-﻿
+﻿@using BolShpping.Models.VM
+@model ViewModel
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_SecondLayout.cshtml";
@@ -95,88 +96,120 @@
                     <!-- comments-area  start -->
                     <div class="comments-area mt-80">
                         <h4>3 comments</h4>
+
+
                         <ol class="commentlist">
-                            <li>
-                                <div class="single-comment">
-                                    <div class="comment-avatar img-full">
-                                        <img alt="" src="~/img/icon/author.png">
-                                    </div>
-                                    <div class="comment-info">
-                                        <a href="#">media name</a>
-                                        <div class="reply">
-                                            <a href="#">Reply</a>
+                            @foreach (var item in Model?.Comments)
+                            {
+                                <li>
+                                    <div class="single-comment">
+                                        <div class="comment-avatar img-full">
+                                            <img alt="" src="">
                                         </div>
-                                        <span class="date">October 6, 2016 at 1:38 am</span>
-                                        <p>just a nice post</p>
-                                    </div>
-                                </div>
-                                <ol>
-                                    <li>
-                                        <div class="single-comment">
-                                            <div class="comment-avatar img-full">
-                                                <img alt="" src="~/img/icon/admin.jpg">
+                                        <div class="comment-info">
+                                            <a href="#">@item.AppUser?.Name @item.AppUser?.SurName</a>
+                                            <div class="reply">
+                                                <a href="#" id="replyComment">Reply</a>
                                             </div>
-                                            <div class="comment-info">
-                                                <a href="#">admin</a>
-                                                <div class="reply">
-                                                    <a href="#">Reply</a>
+                                            <span class="date">@DateTime.Now</span>
+                                            <p>@item.Message</p>
+                                        </div>
+
+                                        <div class="replyArea" style="display:none">
+                                            <div class="comments-area comments-reply-area">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <h3 class="comment-reply-title">Reply</h3>
+                                                        @*<form class="comment-form-area" action="#">*@
+                                                        <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
+                                                        <p class="comment-form-comment">
+                                                            <label>Comment</label>
+                                                            <textarea required="required" id="reply-message"></textarea>
+                                                        </p>
+                                                        <div class="comment-input">
+                                                            <p class="comment-form-author">
+                                                                <label>Name <span class="required">*</span></label>
+                                                                <input type="text" name="Name" id="reply-name" required="required">
+                                                            </p>
+                                                            <p class="comment-form-email">
+                                                                <label>Email <span class="required">*</span></label>
+                                                                <input type="text" name="email" id="reply-email" required="required">
+                                                            </p>
+                                                            <p class="comment-form-url">
+                                                                <label>Website</label>
+                                                                <input type="text" id="reply-website" name="url">
+                                                            </p>
+                                                        </div>
+                                                        <div class="comment-form-submit">
+                                                            <input type="submit" class="reply-submit" value="Post Comment">
+                                                        </div>
+                                                        @*</form>*@
+                                                    </div>
                                                 </div>
-                                                <span class="date">October 6, 2016 at 1:40 am</span>
-                                                <p>just a nice post</p>
                                             </div>
+
                                         </div>
-                                    </li>
-                                </ol>
-                            </li>
-                        </ol>
-                        <ol class="commentlist">
-                            <li>
-                                <div class="single-comment">
-                                    <div class="comment-avatar img-full">
-                                        <img alt="" src="~/img/icon/author.png">
                                     </div>
-                                    <div class="comment-info">
-                                        <a href="#">media name</a>
-                                        <div class="reply">
-                                            <a href="#">Reply</a>
-                                        </div>
-                                        <span class="date">October 6, 2016 at 1:45 am</span>
-                                        <p>just a nice post</p>
-                                    </div>
-                                </div>
-                            </li>
+                                    <ol class= "currentReplyComment">
+                                        @foreach (var reply in Model?.Replies)
+                                        {
+                                            <li>
+                                                <div class="single-comment">
+                                                    <div class="comment-avatar img-full">
+                                                        <img alt="" src="">
+                                                    </div>
+                                                    <div class="comment-info">
+                                                        <a href="#">@reply.Name</a>
+
+                                                        <span class="date">@DateTime.Now</span>
+                                                        <p>@reply.Message</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ol>
+                                </li>
+                            }
                         </ol>
+
+                        
+
+
+
                     </div>
+
                     <!-- comments-area  end -->
                     <!-- comments-reply-area start -->
-                    <div class="comments-area comments-reply-area">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h3 class="comment-reply-title">Leave a Reply</h3>
-                                <form class="comment-form-area" action="#">
-                                    <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
-                                    <p class="comment-form-comment">
-                                        <label>Comment</label>
-                                        <textarea required="required"></textarea>
-                                    </p>
-                                    <div class="comment-input">
-                                        <p class="comment-form-author">
-                                            <label>Name <span class="required">*</span></label>
-                                            <input type="text" name="Name" required="required">
+                    <div class="commentArea">
+                        <div class="comments-area comments-reply-area">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h3 class="comment-reply-title">Comment</h3>
+                                    @*<form class="comment-form-area" action="#">*@
+                                        <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
+                                        <p class="comment-form-comment">
+                                            <label>Comment</label>
+                                            <textarea id="comment-message" required="required"></textarea>
                                         </p>
-                                        <p class="comment-form-email">
-                                            <label>Email <span class="required">*</span></label>
-                                            <input type="text" name="email" required="required">
-                                        </p>
-                                        <p class="comment-form-url">
-                                            <label>Website</label>
-                                            <input type="text" name="url">
-                                        </p>
-                                    </div>
-                                    <div class="comment-form-submit">
-                                        <input type="submit" class="comment-submit" value="Post Comment">
-                                    </div>
-                                </form>
+                                        <div class="comment-input">
+                                            <p class="comment-form-author">
+                                                <label>Name <span class="required">*</span></label>
+                                                <input type="text" name="Name" id="comment-name" required="required">
+                                            </p>
+                                            <p class="comment-form-email">
+                                                <label>Email <span class="required">*</span></label>
+                                                <input type="text" name="email" id="comment-email" required="required">
+                                            </p>
+                                            <p class="comment-form-url">
+                                                <label>Website</label>
+                                                <input type="text" id="comment-website" name="url">
+                                            </p>
+                                        </div>
+                                        <div class="comment-form-submit">
+                                            <input type="button" class="comment-submit" value="Post Comment">
+                                        </div>
+                                    @*</form>*@
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -267,3 +300,181 @@
     </div>
 </div>
 <!-- main-content-warpper end -->
+
+@section Scripts{
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        f = true;
+        $(document).on("click", "#replyComment", function (e) {
+            e.preventDefault();
+            //console.log($(this).next().find("ol"))
+            if (f == true) {
+                document.querySelector(".replyArea").style.display = "block";
+                console.log("true")
+                document.querySelector(".commentArea").style.display = "none";
+
+                f = false;
+            }
+            else {
+                document.querySelector(".replyArea").style.display = "none";
+                console.log("false")
+                document.querySelector(".commentArea").style.display = "block";
+
+                f = true;
+            }
+
+        })
+    </script>
+
+    @*Comment script*@
+<script>
+    $(document).on("click", ".comment-submit", function (e) {
+        //e.preventDefault();
+
+        var name = $("#comment-name").val();
+        var email = $("#comment-email").val();
+        var text = $("#comment-message").val();
+        var website = $("#comment-website").val();
+
+        var formData = new FormData();
+        formData.append("Name", name);
+        formData.append("Email", email);
+        formData.append("Text", text);
+        formData.append("Website", website);
+
+        $.ajax({
+            url: "/Blog/Comment",
+            type: "post",
+            data: formData,
+            dataType: "json",
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+
+                if (response.status === 200) {
+                    console.log(response);
+
+                    let comment = `<li>
+                                    <div class="single-comment">
+                                        <div class="comment-avatar img-full">
+                                            <img alt="" src="">
+                                        </div>
+                                        <div class="comment-info">
+                                            <a href="#" >${response.data.name}</a>
+                                            <div class="reply">
+                                                <a href="#" id="replyComment">Reply</a>
+                                            </div>
+                                            <span class="date">${response.data.dateTime}</span>
+                                            <p>${response.data.message}</p>
+                                        </div>
+                                    </div>
+                                    <ol class= "currentReplyComment" data-id="${response.data.dateTime}">
+
+
+
+                                    </ol>
+                                </li>  `
+
+                    $(".commentlist").prepend(comment);
+
+                }
+
+                if (response.status === 400) {
+                    swal({
+                        title: "Warning!",
+                        text: "Zəhmət olmasa qeydiyyatdan keçin!",
+                        icon: "warning",
+                        dangerMode: true,
+                    })
+                }
+            },
+            error: function (res) {
+                console.log(res)
+                if (res.status == 500) {
+                    swal({
+                        title: "Error!",
+                        text: res.error,
+                        icon: "warning",
+                        dangerMode: true,
+                    })
+                }
+            }
+
+        })
+
+
+
+    });
+</script>
+
+    @*Reply Comment script*@
+<script>
+        $(document).on("click", ".post-reply-comment", function (event) {
+            var name = $("#reply-name").val();
+            var email = $("#reply-email").val();
+            var text = $("#reply-message").val();
+            let id = $(".currentReplyComment").data("id");
+
+
+
+            var formData = new FormData();
+            formData.append("Name", name);
+            formData.append("Email", email);
+            formData.append("Text", text);
+
+
+            $.ajax({
+                url: "/Blog/ReplyComment/" + id,
+                type: "post",
+                data: formData,
+                dataType: "json",
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+
+                    if (response.status === 200) {
+
+                        let reply = `<li>
+                                                <div class="single-comment">
+                                                    <div class="comment-avatar img-full">
+                                                        <img alt="" src="">
+                                                    </div>
+                                                    <div class="comment-info">
+                                                        <a href="#">Emin</a>
+
+                                                        <span class="date"></span>
+                                                        <p>Reply</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                                        `
+                        $(".currentReplyComment").after(reply);
+                        //$("#comment-reply-message").text('');
+                        //console.log($(event.currentTarget).parent().prev().children())
+                        //$(e.currentTarget).parent().before(reply);
+                    }
+
+                    if (response.status == 400) {
+                        swal({
+                            title: "Warning!",
+                            text: "Zəhmət olmasa qeydiyyatdan keçin!",
+                            icon: "warning",
+                            dangerMode: true,
+                        })
+                    }
+
+                },
+                error: function (res) {
+                    console.log(res)
+                }
+
+            })
+        })
+</script>
+}
+

@@ -62,7 +62,11 @@ namespace BolShpping
 
               });
 
-            services.AddControllersWithViews();
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    );
 
             services.Configure<CookieOptions>(options =>
             {

@@ -23,5 +23,9 @@ namespace BolShpping.Models.VM
 
         public string ProductColor { get; set; }
 
+        public IEnumerable<Comment> Comments { get; set; }
+
+        public IEnumerable<Reply> Replies { get; set; }
+
     }
 }

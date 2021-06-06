@@ -6,7 +6,7 @@
 }
 
 <div class="main-wrapper single-product-page">
-    
+
 
     <!-- breadcrumb-area start -->
     <div class="breadcrumb-area breadcramb-bg ptb-80">
@@ -312,50 +312,50 @@
         </div>
     </div>
     <!-- main-content-warpper end -->
-  
+
 
     @section Scripts{
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        
+
         <script>
+            $(document).on("click", ".addCart", function (e) {
+                let id = $(this)[0].id;
+                console.log(id)
+                let quantity = $(".cart-plus-minus-box").val();
+                console.log(quantity)
 
 
+                $.ajax({
+                    url: "/ProductDetail/AddBasket/",
+                    method: "POST",
+                    data: { id: id, quantity: quantity },
+                    dataType: "json",
+                    success: function myfunction(response) {
+                        console.log(response.status)
 
-        $(document).on("click", ".addCart", function (e) {
-            let id = $(this)[0].id;
-            console.log(id)
-            let quantity = $(".cart-plus-minus-box").val();
-            console.log(quantity)
+                        if (response.status === 200) {
+                            swal({
+                                title: "Basket",
+                                text: "Məhsulunuz səbətiniz-ə əlavə olundu",
+                                icon: "success",
+                            });
+                            setTimeout(function () { location.reload(); }, 1700);
 
-
-            $.ajax({
-                url: "/ProductDetail/AddBasket/",
-                method: "POST",
-                data: { id: id, quantity: quantity },
-                dataType: "json",
-                success: function myfunction(response) {
-                    console.log(response.status)
-
-                    if (response.status === 200) {
-                        swal({
-                            title: "Basket",
-                            text: "Məhsulunuz səbətiniz-ə əlavə olundu",
-                            icon: "success",
-                        });
-                        setTimeout(function () { location.reload(); }, 1700);
+                        }
+                        else if (response.status === 404) {
+                            swal({
+                                title: "Basket",
+                                text: "Bu Məhsul artıq səbətinizdə var",
+                                icon: "warning",
+                            });
+                        }
 
                     }
-                    else if (response.status === 404) {
-                        swal({
-                            title: "Basket",
-                            text: "Bu Məhsul artıq səbətinizdə var",
-                            icon: "warning",
-                        });
-                    }
 
-                }
-
+                })
             })
-        })
         </script>
         @*.data("productId")*@
     }
