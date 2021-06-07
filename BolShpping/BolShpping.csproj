@@ -21,6 +21,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\admin\" />
     <Folder Include="wwwroot\img\category\" />
+    <Folder Include="wwwroot\img\discountet\" />
     <Folder Include="wwwroot\img\register\" />
   </ItemGroup>
 

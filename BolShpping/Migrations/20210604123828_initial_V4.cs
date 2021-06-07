@@ -3,10 +3,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BolShpping.Migrations
 {
-    public partial class initial_V3 : Migration
+    public partial class initial_V4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Abouts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    ImageCode = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Abouts", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -110,6 +125,24 @@ namespace BolShpping.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ContactMessages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contacts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Addres = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Number = table.Column<int>(nullable: false),
+                    WorkingHourse = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -297,15 +330,15 @@ namespace BolShpping.Migrations
                     DiscountPrice = table.Column<decimal>(nullable: false),
                     Color = table.Column<string>(nullable: true),
                     CategoryId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    AppUserId = table.Column<string>(nullable: true)
+                    AppUserId = table.Column<int>(nullable: false),
+                    AppUserId1 = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_Products_AspNetUsers_AppUserId1",
+                        column: x => x.AppUserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -449,9 +482,9 @@ namespace BolShpping.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_AppUserId",
+                name: "IX_Products_AppUserId1",
                 table: "Products",
-                column: "AppUserId");
+                column: "AppUserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
@@ -466,6 +499,9 @@ namespace BolShpping.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Abouts");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -489,6 +525,9 @@ namespace BolShpping.Migrations
 
             migrationBuilder.DropTable(
                 name: "ContactMessages");
+
+            migrationBuilder.DropTable(
+                name: "Contacts");
 
             migrationBuilder.DropTable(
                 name: "Discountends");

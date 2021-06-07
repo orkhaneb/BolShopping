@@ -25,5 +25,9 @@ namespace BolShpping.Models.DAL
         public DbSet<Reply> Replies { get; set; }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<File> Files { get; set; }
+        public DbSet<About> Abouts { get; set; }
+        public DbSet<Contact> Contacts  { get; set; }
+
+
     }
 }

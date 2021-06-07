@@ -1,0 +1,66 @@
+﻿@model BolShpping.Models.BLL.Contact
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow my-4">
+            <div class="card-header py-4">
+                Update Contact <a asp-action="Index" class="float-right btn btn-outline-secondary">Back to Index</a>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+
+
+                            <div class="form-group">
+                                <label asp-for="Title" class="control-label"></label>
+                                <input type="text" asp-for="Title" id="Name" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" id="Name" class="form-control" style="height:140px;"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Addres" class="control-label">Address</label>
+                                <input type="text" asp-for="Addres" id="Name" class="form-control" />
+                                <span asp-validation-for="Addres" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input type="text" asp-for="Email" id="Name" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Number" class="control-label">Phone</label>
+                                <input type="text" asp-for="Number" id="Name" class="form-control" />
+                                <span asp-validation-for="Number" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="WorkingHourse" class="control-label">Working Hourse</label>
+                                <input type="text" asp-for="WorkingHourse" id="Name" class="form-control" />
+                                <span asp-validation-for="WorkingHourse" class="text-danger"></span>
+                            </div>
+                            <input type="hidden" asp-for="Id" />
+                            <div class="form-group">
+                                <input type="submit" value="Update" id="btnAddModels" class="btn btn-success name" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+

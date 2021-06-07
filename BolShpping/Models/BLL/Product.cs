@@ -17,7 +17,7 @@ namespace BolShpping.Models.BLL
 
         //foreign key connection
         public int CategoryId { get; set; }
-        public int UserId { get; set; }
+        public int AppUserId { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual AppUser AppUser { get; set; }

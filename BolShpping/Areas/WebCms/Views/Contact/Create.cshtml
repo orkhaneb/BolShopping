@@ -1,0 +1,59 @@
+﻿@model BolShpping.Models.BLL.Contact
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6 my-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-4">
+                Create  <a asp-action="Index" class="float-right btn btn-outline-secondary">Back to index</a>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label">Title</label>
+                        <input asp-for="Title" type="text" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <textarea asp-for="Description"  id="Name" class="form-control" style="height: 140px;"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Addres" class="control-label">Address</label>
+                        <input asp-for="Addres" type="text" class="form-control" />
+                        <span asp-validation-for="Addres" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label">Email</label>
+                        <input asp-for="Email" type="email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Number" class="control-label">Phone</label>
+                        <input asp-for="Number" type="number" class="form-control" />
+                        <span asp-validation-for="Number" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="WorkingHourse" class="control-label">WorkingHourse</label>
+                        <input asp-for="WorkingHourse" type="text" class="form-control" />
+                        <span asp-validation-for="WorkingHourse" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Add" class="btn btn-success" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

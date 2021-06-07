@@ -180,6 +180,5 @@ namespace BolShpping.Areas.WebCms.Controllers
         }
         // Delete Function End
 
-
     }
 }
