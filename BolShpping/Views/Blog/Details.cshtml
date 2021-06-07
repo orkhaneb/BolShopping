@@ -305,28 +305,7 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <script>
-        f = true;
-        $(document).on("click", "#replyComment", function (e) {
-            e.preventDefault();
-            //console.log($(this).next().find("ol"))
-            if (f == true) {
-                document.querySelector(".replyArea").style.display = "block";
-                console.log("true")
-                document.querySelector(".commentArea").style.display = "none";
-
-                f = false;
-            }
-            else {
-                document.querySelector(".replyArea").style.display = "none";
-                console.log("false")
-                document.querySelector(".commentArea").style.display = "block";
-
-                f = true;
-            }
-
-        })
-    </script>
+    
 
     @*Comment script*@
 <script>
@@ -405,6 +384,8 @@
 
         })
 
+       
+
 
 
     });
@@ -472,9 +453,30 @@
                 error: function (res) {
                     console.log(res)
                 }
-
             })
         })
+</script>
+
+<script>
+    f = true;
+    $(document).on("click", "#replyComment", function (e) {
+        e.preventDefault();
+        if (f == true) {
+            this.parentElement.parentElement.nextElementSibling.style.display = "block";
+            console.log("true")
+            //document.querySelector(".commentArea").style.display = "none";
+
+            f = false;
+        }
+        else {
+            this.parentElement.parentElement.nextElementSibling.style.display = "none";
+            console.log("false")
+            //document.querySelector(".commentArea").style.display = "block";
+
+            f = true;
+        }
+
+    })
 </script>
 }
 

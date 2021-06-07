@@ -30,8 +30,8 @@ namespace BolShpping.Controllers
 
         public async Task<IActionResult> Details()
         {
-            var comments = await _context.Comments.Include(c => c.AppUser).ToListAsync();
-            var replies = await _context.Replies.Include(r => r.AppUser).ToListAsync();
+            var comments = await _context.Comments.Include(c => c.AppUser).OrderByDescending(c => c.DateTime).ToListAsync();
+            var replies = await _context.Replies.Include(r => r.AppUser).OrderByDescending(c => c.DateTime).ToListAsync();
             ViewModel vm = new ViewModel()
             {
                 Comments = comments,

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BolShpping.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210605182955_addCommentUserId")]
-    partial class addCommentUserId
+    [Migration("20210607080350_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -198,6 +198,9 @@ namespace BolShpping.Migrations
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -367,6 +370,9 @@ namespace BolShpping.Migrations
 
                     b.Property<int>("CommentId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");

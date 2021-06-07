@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BolShpping.Migrations
 {
-    public partial class initial_V3 : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -77,22 +77,6 @@ namespace BolShpping.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Website = table.Column<string>(nullable: true),
-                    Message = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -265,6 +249,30 @@ namespace BolShpping.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Website = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true),
+                    DateTime = table.Column<DateTime>(nullable: false),
+                    AppUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BlogImages",
                 columns: table => new
                 {
@@ -327,11 +335,19 @@ namespace BolShpping.Migrations
                     Email = table.Column<string>(nullable: true),
                     Website = table.Column<string>(nullable: true),
                     Message = table.Column<string>(nullable: true),
-                    CommentId = table.Column<int>(nullable: false)
+                    DateTime = table.Column<DateTime>(nullable: false),
+                    CommentId = table.Column<int>(nullable: false),
+                    AppUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Replies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Replies_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Replies_Comments_CommentId",
                         column: x => x.CommentId,
@@ -444,6 +460,11 @@ namespace BolShpping.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_AppUserId",
+                table: "Comments",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductImages_ProductId",
                 table: "ProductImages",
                 column: "ProductId");
@@ -457,6 +478,11 @@ namespace BolShpping.Migrations
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Replies_AppUserId",
+                table: "Replies",
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Replies_CommentId",
@@ -518,10 +544,10 @@ namespace BolShpping.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "AspNetUsers");
         }
     }
 }
