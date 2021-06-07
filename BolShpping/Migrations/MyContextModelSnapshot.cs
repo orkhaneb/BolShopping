@@ -214,6 +214,12 @@ namespace BolShpping.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -227,6 +233,8 @@ namespace BolShpping.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Comments");
                 });
@@ -406,8 +414,14 @@ namespace BolShpping.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("CommentId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -422,6 +436,8 @@ namespace BolShpping.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("CommentId");
 
@@ -599,6 +615,13 @@ namespace BolShpping.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("BolShpping.Models.BLL.Comment", b =>
+                {
+                    b.HasOne("BolShpping.Models.BLL.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+                });
+
             modelBuilder.Entity("BolShpping.Models.BLL.Product", b =>
                 {
                     b.HasOne("BolShpping.Models.BLL.AppUser", "AppUser")
@@ -623,6 +646,10 @@ namespace BolShpping.Migrations
 
             modelBuilder.Entity("BolShpping.Models.BLL.Reply", b =>
                 {
+                    b.HasOne("BolShpping.Models.BLL.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
                     b.HasOne("BolShpping.Models.BLL.Comment", "Comment")
                         .WithMany("Replies")
                         .HasForeignKey("CommentId")

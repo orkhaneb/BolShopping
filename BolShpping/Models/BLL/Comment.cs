@@ -13,6 +13,12 @@ namespace BolShpping.Models.BLL
         public string Website { get; set; }
         public string Message { get; set; }
 
+        public DateTime DateTime { get; set; }
+
+        public AppUser AppUser { get; set; }
+
+        public string AppUserId { get; set; }
+
         //primary key connection
         public virtual ICollection<Reply> Replies { get; set; }
     }

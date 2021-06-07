@@ -1,8 +1,9 @@
-﻿@{
+﻿@model BolShpping.Models.VM.ViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
-
-
+@using BolShpping.Models.DAL;
+@inject MyContext  _context
 <!-- our-service-section start -->
 <div class="our-service-section border-top">
     <div class="container">
@@ -130,965 +131,162 @@
             <div class="col-12">
                 <div class="tabs-categorys-list">
                     <ul class="nav" role="tablist">
-                        <li role="presentation" class="active"><a class="active" href="#shop" aria-controls="shop" role="tab" data-toggle="tab">Shop</a></li>
-                        <li role="presentation"><a href="#men" aria-controls="men" role="tab" data-toggle="tab">Men</a></li>
-                        <li role="presentation"><a href="#women" aria-controls="women" role="tab" data-toggle="tab">Women</a></li>
-                        <li role="presentation"><a href="#accessories" aria-controls="accessories" role="tab" data-toggle="tab">Accessories</a></li>
+                        @foreach (var item in Model.Categories)
+                        {
+                            <li role="presentation"><a href="#@item.Name" aria-controls="@item.Name" role="tab" data-toggle="tab">@item.Name</a></li>
+                            @*<li role="presentation"><a href="#women" aria-controls="women" role="tab" data-toggle="tab">Women</a></li>*@
+                            @*<li role="presentation"><a href="#accessories" aria-controls="accessories" role="tab" data-toggle="tab">Accessories</a></li>*@
+                        }
+
                     </ul>
                 </div>
             </div>
         </div>
-
+        @{
+            int productCount = 0;
+        }
         <!-- tab-contnt start -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="shop">
-                <div class="row">
-                    <div class="product-active-3 owl-carousel">
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/10.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+
+            @foreach (var category in Model.Categories)
+            {
+
+                <div role="tabpanel" class="tab-pane" id="@category.Name">
+                    <div class="row">
+                        <div class="product-active-3 owl-carousel">
+                            @foreach (var item in Model.Products)
+                            {
+
+                                if (category.Name == item.Category.Name)
+                                {
+                                    ++productCount;
+                                    @*<div class="col">*@
+                                    <!-- single-product-wrap start -->
+                                    <div class="single-product-wrap">
+                                        <div class="product-thumbnail">
+                                            <a href="#">
+                                                <img class="first-image" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
+                                            </a>
+                                            <span class="label-sale">new</span>
+                                            <div class="product-action">
+                                                <a href="#" class="add-to-cart-btn addCart" id="@item.Id"><i class="icon fas fa-cart-plus"></i></a>
+                                                <a href="#" class="quick-view" id="add-favourite" data-id="@item.Id"><i class="far fa-heart"></i></a>
+                                                <a href="#" class="links-details"><i class="ion-clipboard"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="product-content text-center">
+                                            <h3 class="product-name"><a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">@item.Name</a></h3>
+                                            <div class="price-box">
+                                                <span class="old-price">$@item.DiscountPrice</span>
+                                                <span class="new-price">$@item.Price</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">Pellentesque habitant</a></h3>
-                                    <div class="price-box">
-                                        <span class="new-price">$209.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/11.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">lobortis pharetra</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$298.00</span>
-                                        <span class="new-price">$255.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/9.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale discount">-12%</span>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">consequat lacus</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$340.00</span>
-                                        <span class="new-price">$329.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/13.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">consequat lacus</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$199.00</span>
-                                        <span class="new-price">$189.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/8.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">imperdiet vel</a></h3>
-                                    <div class="price-box">
-                                        <span class="new-price">$309.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/7.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale discount">-12%</span>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">malesuada fames</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$218.00</span>
-                                        <span class="new-price">$200.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/5.jpg" alt="">
-                                        <img class="second-image" src="~/img/product/2.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">Curabitur fames</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$219.00</span>
-                                        <span class="new-price">$203.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/3.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">venenatis</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$212.00</span>
-                                        <span class="new-price">$209.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/14.jpg" alt="">
-                                        <img class="second-image" src="~/img/product/1.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">malesuada fames</a></h3>
-                                    <div class="price-box">
-                                        <span class="new-price">$200.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/12.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">fames malesuada</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$212.00</span>
-                                        <span class="new-price">$209.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
+
+                                    <!-- Modal-wrapper start -->
+                                    <!--<div class="modal-wrapper">
+                                        <div class="modal fade " id="exampleModalCenter@(productCount)">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>-->
+                                    <!-- modal-inner-area start -->
+                                    <!--<div class="modal-inner-area row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="product-thumbnail">
+                                                <div class="tab-content large-thum-image">
+                                                    <div role="tabpanel" class="tab-pane active" id="Thumb1">
+                                                        <img src="~/img/product/larg-1.jpg" alt="">
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane" id="Thumb2">
+                                                        <img src="~/img/product/larg-2.jpg" alt="">
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane" id="Thumb3">
+                                                        <img src="~/img/product/larg-3.jpg" alt="">
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane" id="Thumb4">
+                                                        <img src="~/img/product/larg-4.jpg" alt="">
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane" id="Thumb5">
+                                                        <img src="~/img/product/larg-5.jpg" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-product-tab">
+                                                <ul class="nav product-small-thum slider-vertical">
+                                                    <li role="presentation" class="active"><a href="~/#Thumb1" data-toggle="tab"><img src="~/img/product/1.jpg" alt=""></a></li>
+                                                    <li role="presentation"><a href="~/#Thumb2" data-toggle="tab"><img src="~/img/product/2.jpg" alt=""></a></li>
+                                                    <li role="presentation"><a href="~/#Thumb3" data-toggle="tab"><img src="~/img/product/3.jpg" alt=""></a></li>
+                                                    <li role="presentation"><a href="~/#Thumb4" data-toggle="tab"><img src="~/img/product/4.jpg" alt=""></a></li>
+                                                    <li role="presentation"><a href="~/#Thumb5" data-toggle="tab"><img src="~/img/product/5.jpg" alt=""></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">-->
+                                    <!-- quick-view-content start -->
+                                    <!--<div class="quick-view-content">
+                                        <div class="product-info">
+                                            <h2>@item.Name</h2>
+                                            <div class="price-box">
+                                                <span class="new-price">$@item.Price</span>
+                                                <span class="old-price">$@item.DiscountPrice</span>
+                                            </div>
+                                            <p>
+                                                @item.Description
+                                            </p>
+                                            <form class="modal-cart">
+                                                <div class="quantity">
+                                                    <label>Quantity</label>
+                                                    <div class="cart-plus-minus">
+                                                        <input class="cart-plus-minus-box" type="text" value="0">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div class="quick-add-to-cart">
+                                                <button class="quick-add-to-btn" id="@item.Id">Add to cart</button>
+                                            </div>
+                                        </div>
+                                        <div class="social-sharing">
+                                            <h4>Share</h4>
+                                            <ul>
+                                                <li class="facebook"><a target="_blank" href="~/#"><i class="fa fa-facebook"></i></a></li>
+                                                <li class="twitter"><a target="_blank" href="~/#"><i class="fa fa-twitter"></i></a></li>
+                                                <li class="googleplus"><a target="_blank" href="~/#"><i class="fa fa-google-plus"></i></a></li>
+                                                <li class="pinterest"><a target="_blank" href="~/#"><i class="fa fa-pinterest"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>-->
+                                    <!-- quick-view-content end -->
+                                    <!--</div>
+                                    </div>-->
+                                    <!-- modal-inner-area end -->
+                                    <!--</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <!-- Modal-wrapper end -->
+
+                                }
+
+
+
+
+                            }
                         </div>
                     </div>
                 </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="men">
-                <div class="row">
-                    <div class="product-active-3 owl-carousel">
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/8.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">Pellentesque habitant</a></h3>
-                                    <div class="price-box">
-                                        <span class="new-price">$209.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/9.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">lobortis pharetra</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$298.00</span>
-                                        <span class="new-price">$255.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/10.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale discount">-12%</span>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">consequat lacus</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$340.00</span>
-                                        <span class="new-price">$329.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/11.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">consequat lacus</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$199.00</span>
-                                        <span class="new-price">$189.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/14.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">imperdiet vel</a></h3>
-                                    <div class="price-box">
-                                        <span class="new-price">$309.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/13.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale discount">-12%</span>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">malesuada fames</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$218.00</span>
-                                        <span class="new-price">$200.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/7.jpg" alt="">
-                                        <img class="second-image" src="~/img/product/2.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">Curabitur fames</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$219.00</span>
-                                        <span class="new-price">$203.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/6.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">venenatis</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$212.00</span>
-                                        <span class="new-price">$209.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/14.jpg" alt="">
-                                        <img class="second-image" src="~/img/product/1.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">malesuada fames</a></h3>
-                                    <div class="price-box">
-                                        <span class="new-price">$200.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/12.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">fames malesuada</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$212.00</span>
-                                        <span class="new-price">$209.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="women">
-                <div class="row">
-                    <div class="product-active-3 owl-carousel">
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/9.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">Pellentesque habitant</a></h3>
-                                    <div class="price-box">
-                                        <span class="new-price">$209.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/11.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">lobortis pharetra</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$298.00</span>
-                                        <span class="new-price">$255.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/10.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale discount">-12%</span>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">consequat lacus</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$340.00</span>
-                                        <span class="new-price">$329.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/12.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">consequat lacus</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$199.00</span>
-                                        <span class="new-price">$189.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/1.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">imperdiet vel</a></h3>
-                                    <div class="price-box">
-                                        <span class="new-price">$309.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/2.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale discount">-12%</span>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">malesuada fames</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$218.00</span>
-                                        <span class="new-price">$200.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/3.jpg" alt="">
-                                        <img class="second-image" src="~/img/product/4.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">Curabitur fames</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$219.00</span>
-                                        <span class="new-price">$203.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/5.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">venenatis</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$212.00</span>
-                                        <span class="new-price">$209.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/14.jpg" alt="">
-                                        <img class="second-image" src="~/img/product/1.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">malesuada fames</a></h3>
-                                    <div class="price-box">
-                                        <span class="new-price">$200.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/12.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">fames malesuada</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$212.00</span>
-                                        <span class="new-price">$209.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="accessories">
-                <div class="row">
-                    <div class="product-active-3 owl-carousel">
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/2.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">Pellentesque habitant</a></h3>
-                                    <div class="price-box">
-                                        <span class="new-price">$209.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/1.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">lobortis pharetra</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$298.00</span>
-                                        <span class="new-price">$255.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/3.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale discount">-12%</span>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">consequat lacus</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$340.00</span>
-                                        <span class="new-price">$329.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/4.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">consequat lacus</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$199.00</span>
-                                        <span class="new-price">$189.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/5.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">imperdiet vel</a></h3>
-                                    <div class="price-box">
-                                        <span class="new-price">$309.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/6.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale discount">-12%</span>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">malesuada fames</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$218.00</span>
-                                        <span class="new-price">$200.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/7.jpg" alt="">
-                                        <img class="second-image" src="~/img/product/2.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">Curabitur fames</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$219.00</span>
-                                        <span class="new-price">$203.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/8.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">venenatis</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$212.00</span>
-                                        <span class="new-price">$209.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/9.jpg" alt="">
-                                        <img class="second-image" src="~/img/product/1.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">malesuada fames</a></h3>
-                                    <div class="price-box">
-                                        <span class="new-price">$200.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-thumbnail">
-                                    <a href="single-product.html">
-                                        <img class="first-image" src="~/img/product/12.jpg" alt="">
-                                    </a>
-                                    <span class="label-sale">new</span>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                        <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                    </div>
-                                </div>
-                                <div class="product-content text-center">
-                                    <h3 class="product-name"><a href="single-product.html">fames malesuada</a></h3>
-                                    <div class="price-box">
-                                        <span class="old-price">$212.00</span>
-                                        <span class="new-price">$209.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
+
+
+
+
+
+
+
+
         </div>
         <!-- tab-contnt end -->
     </div>
@@ -1123,7 +321,6 @@
     </div>
 </div>
 <!-- banner-area end -->
-
 <!-- section-area strat -->
 <div class="section-area-2 ptb-80 bg-gray">
     <div class="container">
@@ -1265,3 +462,76 @@
     </div>
 </div>
 <!-- latest-blog-area end -->
+
+@section Scripts{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+
+
+        $(document).on("click", "#add-favourite", function (e) {
+            e.preventDefault();
+            var productId = $(e.currentTarget).data("id");
+            console.log(productId)
+
+            $.ajax({
+                url: "/Home/AddFavourite/" + productId,
+                success: function (response) {
+                    $("#cart_count").html(response.dataCount);
+                    if (response.status === 200) {
+
+
+                        swal({
+                            //title: "Təşəkkür edirik!",
+                            text: response.message,
+                            icon: "success",
+                        });
+
+                    }
+                }
+
+            })
+        })
+
+
+        $(document).on("click", ".addCart", function (e) {
+            e.preventDefault();
+            let id = $(this)[0].id;
+            console.log(id)
+            let quantity = 1;
+            console.log(quantity)
+
+
+            $.ajax({
+                url: "/ProductDetail/AddBasket/",
+                method: "POST",
+                data: { id: id, quantity: quantity },
+                dataType: "json",
+                success: function myfunction(response) {
+                    console.log(response.status)
+
+                    if (response.status === 200) {
+                        swal({
+                            title: "Basket",
+                            text: "Məhsulunuz səbətiniz-ə əlavə olundu",
+                            icon: "success",
+                        });
+                        setTimeout(function () { location.reload(); }, 1700);
+
+                    }
+                    else if (response.status === 404) {
+                        swal({
+                            title: "Basket",
+                            text: "Bu Məhsul artıq səbətinizdə var",
+                            icon: "warning",
+                        });
+                    }
+
+                }
+
+            })
+        })
+    </script>
+    @*.data("productId")*@
+}
+
+

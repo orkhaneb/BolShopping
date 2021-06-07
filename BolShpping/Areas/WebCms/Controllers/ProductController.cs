@@ -29,7 +29,8 @@ namespace BolShpping.Areas.WebCms.Controllers
         // Product Index Function Start
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.Include(i=>i.ProductImages).Include(c => c.Category).ToListAsync());
+            var product = await _context.Products.Include(i => i.ProductImages).Include(c => c.Category).ToListAsync();
+            return View(product);
         }
         // Product Index Function End
 
@@ -59,21 +60,27 @@ namespace BolShpping.Areas.WebCms.Controllers
                     Color = viewModel.ProductColor,
                     Size = viewModel.ProductSize,
                     DiscountPrice = viewModel.Product.DiscountPrice,
-                    Price = viewModel.Product.Price
-                    
+                    Price = viewModel.Product.Price,
                 };
+
                 await _context.Products.AddAsync(model);
 
                 await _context.SaveChangesAsync();
-
+                int count = 0;
                 foreach (var item in files)
                 {
-                    var image = await ImagesHelpers.ImageUploadAsync(_env.WebRootPath,item, "img", "product");
+                    var image = await ImagesHelpers.ImageUploadAsync(_env.WebRootPath, item, "img", "product");
                     await _context.ProductImages.AddAsync(new ProductImage
                     {
                         ProductId = model.Id,
                         ImageCode = image
                     });
+                    if (count < files.Count())
+                    {
+                        model.ProductImages[count].ImageCode = image;
+                        ++count;
+                    }    
+
                     await _context.SaveChangesAsync();
                 }
 

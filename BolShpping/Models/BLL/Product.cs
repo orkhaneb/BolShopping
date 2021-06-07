@@ -22,6 +22,6 @@ namespace BolShpping.Models.BLL
         public virtual Category Category { get; set; }
         public virtual AppUser AppUser { get; set; }
 
-        public IEnumerable<ProductImage> ProductImages { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
     }
 }

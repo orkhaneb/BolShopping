@@ -48,6 +48,7 @@ namespace BolShpping.Controllers
                 return View(registerModel);
             }
             AppUser user = registerModel;
+            user.Name = registerModel.Name;
 
             IdentityResult result = await _userManager.CreateAsync(user, registerModel.Password);
 
@@ -71,7 +72,7 @@ namespace BolShpping.Controllers
             byte[] tokenGeneratedBytes = Encoding.UTF8.GetBytes(token);
             var codeEncoded = WebEncoders.Base64UrlEncode(tokenGeneratedBytes);
 
-            await _emailSender.SendEmailAsync(registerModel.Email, "Conform your email",
+            await _emailSender.SendEmailAsync(registerModel.Email, "Confirm your email",
 
                  $"Confirm your account by following to " +
                 $"<a href='{HtmlEncoder.Default.Encode($"https://localhost:44303/Account/ConfirmEmail?token={codeEncoded}&userId={user.Id}")}'>" +
