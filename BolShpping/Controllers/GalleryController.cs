@@ -53,34 +53,21 @@ namespace BolShpping.Controllers
 
             if (category == null)
             {
-                filter = await _context.Products.Where(p => p.Size == size.Size &&
-                                         ((fromPrice != 0 && p.Price >= fromPrice && toPrice == 0) ||
-                                          (toPrice != 0 && p.Price <= toPrice && fromPrice == 0) ||
-                                          (toPrice == 0 && fromPrice == 0) ||
-                                          (fromPrice != 0 && toPrice != 0 && p.Price >= fromPrice && p.Price <= toPrice))).ToListAsync();
+                filter = await _context.Products.Where(p => p.Size == size.Size).ToListAsync();
             }
 
             if (size == null)
             {
                 filter = await _context.Products.Where(
                     
-                    p => (p.CategoryId == category.Id) &&
-                                         ((fromPrice != 0 && p.Price >= fromPrice && toPrice == 0) ||
-                                          (toPrice != 0 && p.Price <= toPrice && fromPrice == 0) ||
-                                          (toPrice == 0 && fromPrice == 0) ||
-                                          (fromPrice != 0 && toPrice != 0 && p.Price >= fromPrice && p.Price <= toPrice))).ToListAsync();
+                    p => (p.CategoryId == category.Id)).ToListAsync();
             }
 
             if (category != null && size != null)
             {
                 filter = await _context.Products.Where(
                     
-                                    p => (p.CategoryId == category.Id && p.Size == size.Size) &&
-                                         ((fromPrice != 0 && p.Price >= fromPrice && toPrice == 0) ||
-                                          (toPrice != 0 && p.Price <= toPrice && fromPrice == 0) ||
-                                          (toPrice == 0 && fromPrice == 0) ||
-                                          (fromPrice != 0 && toPrice != 0 && p.Price >= fromPrice && p.Price <= toPrice))) 
-                                                                                                        .ToListAsync();
+                                    p => (p.CategoryId == category.Id && p.Size == size.Size)).ToListAsync();
             }
 
 
