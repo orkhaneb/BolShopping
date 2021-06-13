@@ -22,18 +22,28 @@ namespace BolShpping.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
-            return View();
+         
+            ViewModel vm = new ViewModel()
+            {
+                Blogs = await _context.Blogs.Include(p => p.BlogImages).ToListAsync(),
+              
+            };
+            return View(vm);
         }
 
-        public async Task<IActionResult> Details()
+        public async Task<IActionResult> Details(int? id)
         {
+            var singleBlog = await _context.Blogs.FindAsync(id);
+
+            var modelid = _context.BlogImages?.Where(pi => pi.BlogId == singleBlog.Id).FirstOrDefault().ImageCode;
+
             var comments = await _context.Comments.Include(c => c.AppUser).OrderByDescending(c => c.DateTime).ToListAsync();
             var replies = await _context.Replies.Include(r => r.AppUser).OrderByDescending(c => c.DateTime).ToListAsync();
             ViewModel vm = new ViewModel()
             {
+                Blog = singleBlog,
                 Comments = comments,
                 Replies = replies
             };

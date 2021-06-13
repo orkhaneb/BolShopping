@@ -13,7 +13,6 @@ namespace BolShpping.Models.VM
         public Product Product { get; set; }
         public IEnumerable<Product> Products { get; set; }
         public IEnumerable<ProductImage> ProductImages { get; set; }
-        public ProductImage ProductImage { get; set; }
         public Category Category { get; set; }
 
         public IEnumerable<Category> Categories { get; set; }
@@ -26,6 +25,14 @@ namespace BolShpping.Models.VM
         public IEnumerable<Comment> Comments { get; set; }
 
         public IEnumerable<Reply> Replies { get; set; }
+
+        public Blog Blog  { get; set; }
+        public IEnumerable<Blog> Blogs { get; set; }
+     
+        public IEnumerable<BlogImage> BlogImages { get; set; }
+
+        public IEnumerable<Contact> Contacts { get; set; }
+        public SendMessage SendMessage  { get; set; }
 
     }
 }

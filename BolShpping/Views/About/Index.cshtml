@@ -1,4 +1,5 @@
-﻿
+﻿@using BolShpping.Models.BLL;
+@model IEnumerable<About>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_SecondLayout.cshtml";
@@ -25,18 +26,14 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="about-us-img">
-                    <img src="~/img/about/about1.jpg" alt="">
+                    <img src="~/img/@_context.Abouts.FirstOrDefault().ImageCode" alt="">
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="about-info-wrapper">
-                    <h2>Our company</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum ullam repellat mollitia odio aliquid, assumenda, quis, reprehenderit, fugit hic optio sit! Vitae id quisquam aperiam sint amet perspiciatis, praesentium quasi!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum ullam repellat mollitia odio aliquid, assumenda, quis, reprehenderit, fugit hic optio sit! Vitae.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum ullam repellat mollitia odio aliquid, assumenda, quis, reprehenderit,</p>
-                    <div class="read-more-btn">
-                        <a href="#">read more</a>
-                    </div>
+                    <h2>@_context.Abouts.FirstOrDefault().Title</h2>
+                    <p>@_context.Abouts.FirstOrDefault().Description</p>
+
                 </div>
             </div>
         </div>

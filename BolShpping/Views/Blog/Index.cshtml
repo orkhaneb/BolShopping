@@ -1,10 +1,12 @@
-﻿
+﻿@model BolShpping.Models.VM.ViewModel
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_SecondLayout.cshtml";
 }
 
-
+@using BolShpping.Models.DAL;
+@inject MyContext  _context
 <!-- breadcrumb-area start -->
 <div class="breadcrumb-area breadcramb-bg ptb-80">
     <div class="container">
@@ -28,219 +30,54 @@
                 <!-- blog-content-wrapper start -->
                 <div class="blog-content-wrapper pt-80">
                     <!-- single-blog-area start -->
-                    <div class="single-blog-area">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Fashion</a></li>
-                                <li>,</li>
-                                <li><a href="#">WordPress</a></li>
-                            </ul>
-                        </div>
-                        <div class="blog-titel 	blog-image">
-                            <h1><a href="blog-details.html">Blog image post</a></h1>
-                        </div>
-                        <span class="post-author">
-                            <span class="posted-by">Posted by </span>admin
-                        </span>
-                        <span class="post-separator"> | </span>
-                        <span class="post-date">March 10, 2015</span>
-
-                        <div class="post-thumbnail">
-                            <a href="blog-details.html">
-                                <img src="~/img/blog/large-2.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="postinfo-wrapper">
-                            <p class="mb-30">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto fugiat possimus tempora voluptas natus. Laboriosam dicta consectetur tempora omnis aspernatur facilis, repudiandae laudantium delectus beatae. Velit cupiditate
-                                officia, laboriosam non deleniti!
-                            </p>
-                            <a href="blog-details.html" class="readmore button">READ MORE</a>
-                        </div>
-                        <!-- social-comment start -->
-                        <div class="social-comment">
-                            <div class="social-sharing">
-                                <h3 class="social-title">SHARE THIS POST</h3>
-                                <ul class="social-icons">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    @foreach (var item in Model.Blogs)
+                    {
+                        <div class="single-blog-area">
+                            <div class="post-category">
+                                <ul>
+                                    <li><a href="#">Fashion</a></li>
+                            
                                 </ul>
                             </div>
-                            <a href="#" class="blog-comment">3 COMMENTS</a>
-                        </div>
-                        <!-- social-comment end -->
-                    </div>
-                    <!-- single-blog-area end -->
-                    <!-- single-blog-area start -->
-                    <div class="single-blog-area">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#"> Creative</a></li>
-                                <li>,</li>
-                                <li><a href="#">Photography</a></li>
-                                <li>,</li>
-                                <li><a href="#">Travel</a></li>
-                            </ul>
-                        </div>
-                        <div class="blog-titel">
-                            <h1><a href="blog-details.html">Post With Audio</a></h1>
-                        </div>
-                        <span class="post-author">
-                            <span class="posted-by">Posted by </span>admin
-                        </span>
-                        <span class="post-separator"> | </span>
-                        <span class="post-date">February 8, 2018</span>
-
-                        <div class="post-thumbnail">
-                            <div class="blog-audio embed-responsive embed-responsive-16by9">
-                                <iframe src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/244702956&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+                            <div class="blog-titel 	blog-image">
+                              <h1><a asp-controller="Blog" asp-action="Details" asp-route-id="@item.Id">   <i class="fas fa-thumbtack" style="color: #fe5f38;"></i> @item.Title</a></h1>
                             </div>
-                        </div>
-                        <div class="postinfo-wrapper">
-                            <p class="mb-30">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto fugiat possimus tempora voluptas natus. Laboriosam dicta consectetur tempora omnis aspernatur facilis, repudiandae laudantium delectus beatae. Velit cupiditate
-                                officia, laboriosam non deleniti!
-                            </p>
-                            <a href="blog-details.html" class="readmore button">READ MORE</a>
-                        </div>
-                        <!-- social-comment start -->
-                        <div class="social-comment">
-                            <div class="social-sharing">
-                                <h3 class="social-title">SHARE THIS POST</h3>
-                                <ul class="social-icons">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                </ul>
-                            </div>
-                            <a href="#" class="blog-comment">3 COMMENTS</a>
-                        </div>
-                        <!-- social-comment end -->
-                    </div>
-                    <!-- single-blog-area end -->
-                    <!-- single-blog-area start -->
-                    <div class="single-blog-area">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">WordPress</a></li>
-                            </ul>
-                        </div>
-                        <div class="blog-titel">
-                            <h1><a href="blog-details.html">Post with Gallery</a></h1>
-                        </div>
-                        <span class="post-author">
-                            <span class="posted-by">Posted by </span>admin
-                        </span>
-                        <span class="post-separator"> | </span>
-                        <span class="post-date">March 10, 2015</span>
+                            <span class="post-author">
+                                <span class="posted-by">Posted by </span>@item.UserName
+                            </span>
+                            <span class="post-separator"> | </span>
+                            <span class="post-date">@item.DateTime</span>
 
-                        <div class="post-thumbnail">
-                            <div class="post-slider owl-carousel">
-                                <div class="single-post-slider">
-                                    <img src="~/img/blog/large-1.jpg" alt="">
+                            <div class="post-thumbnail">
+                                <a asp-controller="Blog" asp-action="Details" asp-route-id="@item.Id">
+                                    <img src="~/img/@_context.BlogImages.Where(i=>i.BlogId == item.Id).FirstOrDefault().ImageCode" alt="">
+                                </a>
+                            </div>
+                            <div class="postinfo-wrapper">
+                                <p class="mb-30">
+                                    @item.Description
+                                </p>
+                                <a asp-controller="Blog" asp-action="Details" asp-route-id="@item.Id" class="readmore button">READ MORE</a>
+                            </div>
+                            <!-- social-comment start -->
+                            <div class="social-comment">
+                                <div class="social-sharing">
+                                    <h3 class="social-title">SHARE THIS POST</h3>
+                                    <ul class="social-icons">
+                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    </ul>
                                 </div>
-                                <div class="single-post-slider">
-                                    <img src="~/img/blog/large-2.jpg" alt="">
-                                </div>
+                                <a href="#" class="blog-comment">3 COMMENTS</a>
                             </div>
+                            <!-- social-comment end -->
                         </div>
-                        <div class="postinfo-wrapper">
-                            <p class="mb-30">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto fugiat possimus tempora voluptas natus. Laboriosam dicta tempora consectetur omnis aspernatur facilis, repudiandae laudantium delectus beatae. Velit cupiditate
-                                officia, laboriosam non deleniti!
-                            </p>
-                            <a href="blog-details.html" class="readmore button">READ MORE</a>
-                        </div>
-                        <!-- social-comment start -->
-                        <div class="social-comment">
-                            <div class="social-sharing">
-                                <h3 class="social-title">SHARE THIS POST</h3>
-                                <ul class="social-icons">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                </ul>
-                            </div>
-                            <a href="#" class="blog-comment">3 COMMENTS</a>
-                        </div>
-                        <!-- social-comment end -->
-                    </div>
+                    }
                     <!-- single-blog-area end -->
-                    <!-- single-blog-area start -->
-                    <div class="single-blog-area">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Videos</a></li>
-                            </ul>
-                        </div>
-                        <div class="blog-titel">
-                            <h1><a href="blog-details.html">Post with Video</a></h1>
-                        </div>
-                        <span class="post-author">
-                            <span class="posted-by">Posted by </span>admin
-                        </span>
-                        <span class="post-separator"> | </span>
-                        <span class="post-date"> December 1, 2014 </span>
 
-                        <div class="post-thumbnail">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe width="600" height="400" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/5T-_dYz8Uvw"></iframe>
-                            </div>
-                        </div>
-                        <div class="postinfo-wrapper">
-                            <p class="mb-30">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto fugiat possimus tempora voluptas natus. Laboriosam dicta tempora consectetur omnis aspernatur facilis, repudiandae laudantium delectus beatae. Velit cupiditate
-                                officia, laboriosam non deleniti!
-                            </p>
-                            <a href="blog-details.html" class="readmore button">READ MORE</a>
-                        </div>
-                        <!-- social-comment start -->
-                        <div class="social-comment">
-                            >
-                            <div class="social-sharing">
-                                <h3 class="social-title">SHARE THIS POST</h3>
-                                <ul class="social-icons">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                </ul>
-                            </div>
-                            <a href="#" class="blog-comment">3 COMMENTS</a>
-                        </div>
-                        <!-- social-comment end -->
-                    </div>
-                    <!-- single-blog-area end -->
-                    <!-- paginatoin-area start -->
-                    <div class="paginatoin-area">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <p>Showing 10-13 of 13 item(s) </p>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <ul class="pagination-box">
-                                    <li>
-                                        <a href="#" class="Previous"><i class="fa fa-angle-left"></i> Previous</a>
-                                    </li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li>
-                                        <a href="#" class="Next"> Next <i class="fa fa-angle-right"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- paginatoin-area end -->
                 </div>
                 <!-- blog-content-wrapper end -->
             </div>

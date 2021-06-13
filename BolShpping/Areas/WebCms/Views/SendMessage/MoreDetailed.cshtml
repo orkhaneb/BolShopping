@@ -1,0 +1,48 @@
+﻿@model BolShpping.Models.BLL.SendMessage
+@{
+    ViewData["Title"] = "MoreDetailed";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6 my-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-4">
+                Muracietin etrafi goruntusu  <a asp-action="Index" class="float-right btn btn-outline-secondary">Geri cix</a>
+            </div>
+            <div class="card-body">
+                <form asp-action="MoreDetailed">
+                    <input type="hidden" asp-for="Id" />
+
+
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input type="text" asp-for="Name" class="form-control" disabled />
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input type="text" asp-for="LastName" class="form-control" disabled />
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input type="text" asp-for="Email" class="form-control" disabled />
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Subjet" class="control-label"></label>
+                        <input type="text" asp-for="Subjet" class="form-control" disabled />
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Message" class="control-label"></label>
+                        <textarea asp-for="Message" id="Name" class="form-control" style="height:140px;" disabled></textarea>
+                      
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

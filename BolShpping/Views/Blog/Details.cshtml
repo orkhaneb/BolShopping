@@ -29,30 +29,30 @@
                 <!-- blog-details-area start -->
                 <div class="blog-details-area pt-80">
                     <!-- single-blog-area start -->
+                  
                     <div class="single-blog-area blog-with-post">
                         <div class="post-category">
                             <ul>
-                                <li><a href="#">WordPress</a></li>
+                                <li><a href="#">Fasione</a></li>
                             </ul>
                         </div>
                         <div class="blog-titel">
-                            <h1><a href="#">Post with Gallery</a></h1>
+                            <h1><a href="#">@Model.Blog.Title</a></h1>
                         </div>
                         <span class="post-author">
-                            <span class="posted-by">Posted by </span>admin
+                            <span class="posted-by">Posted by </span>@Model.Blog.Title
                         </span>
                         <span class="post-separator"> | </span>
-                        <span class="post-date">March 10, 2015</span>
+                        <span class="post-date">@Model.Blog.DateTime</span>
                         <div class="post-thumbnail">
                             <a href="#">
-                                <img alt="" src="~/img/blog/large-3.jpg">
+                                <img alt="" src="~/img/@_context.BlogImages?.Where(pi => pi.BlogId == Model.Blog.Id).FirstOrDefault().ImageCode">
                             </a>
                         </div>
                         <div class="postinfo-wrapper">
                             <div class="post-info">
                                 <p>
-                                    Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent ornare tortor ac ante egestas hendrerit. Aliquam et metus pharetra, bibendum
-                                    massa nec, fermentum odio. Nunc id leo ultrices, mollis ligula in, finibus tortor. Mauris eu dui ut lectus fermentum eleifend. Pellentesque faucibus sem ante, non malesuada odio varius nec. Suspendisse potenti.
+                                  @Model.Blog.Description
                                 </p>
                                 <blockquote>
                                     <p>
@@ -60,12 +60,6 @@
                                         ut eleifend. Proin dictum tempor ligula, ac feugiat metus. Sed finibus tortor eu scelerisque scelerisque.
                                     </p>
                                 </blockquote>
-                                <p>
-                                    Aenean et tempor eros, vitae sollicitudin velit. Etiam varius enim nec quam tempor, sed efficitur ex ultrices. Phasellus pretium est vel dui vestibulum condimentum. Aenean nec suscipit nibh. Phasellus nec lacus
-                                    id arcu facilisis elementum. Curabitur lobortis, elit ut elementum congue, erat ex bibendum odio, nec iaculis lacus sem non lorem. Duis suscipit metus ante, sed convallis quam posuere quis. Ut tincidunt eleifend
-                                    odio, ac fringilla mi vehicula nec. Nunc vitae lacus eget lectus imperdiet tempus sed in dui. Nam molestie magna at risus consectetur, placerat suscipit justo dignissim. Sed vitae fringilla enim, nec ullamcorper
-                                    arcu.
-                                </p>
                                 <p>
                                     Suspendisse turpis ipsum, tempus in nulla eu, posuere pharetra nibh. In dignissim vitae lorem non mollis. Praesent pretium tellus in tortor viverra condimentum. Nullam dignissim facilisis nisl, accumsan placerat
                                     justo ultricies vel. Vivamus finibus mi a neque pretium, ut convallis dui lacinia. Morbi a rutrum velit. Curabitur sagittis quam quis consectetur mattis. Aenean sit amet quam vel turpis interdum sagittis et
@@ -82,16 +76,17 @@
                             <div class="social-sharing">
                                 <h3 class="social-title">SHARE THIS POST</h3>
                                 <ul class="social-icons">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
                                 </ul>
                             </div>
                         </div>
                         <!-- social-comment end -->
                     </div>
+                    
                     <!-- single-blog-area end -->
                     <!-- comments-area  start -->
                     <div class="comments-area mt-80">
@@ -220,22 +215,7 @@
             <div class="col-lg-3 order-2 order-lg-1">
                 <!-- blog-sidebar-wrapper start -->
                 <div class="blog-sidebar-wrapper pt-80">
-                    <!-- blog-sidebar-wrap start -->
-                    <div class="blog-sidebar-wrap">
-                        <div class="sidebar-title">
-                            <h2>Categories</h2>
-                        </div>
-                        <ul class="single-categories-blog">
-                            <li><a href="#">Creative (3)</a> </li>
-                            <li><a href="#">Fashion <span>(1)</span></a></li>
-                            <li><a href="#">Image <span>(1)</span></a></li>
-                            <li><a href="#">Photography <span>(1)</span></a></li>
-                            <li><a href="#">Travel <span>(5)</span></a></li>
-                            <li><a href="#">Videos <span>(1)</span></a></li>
-                            <li><a href="#">WordPress <span>(2)</span></a></li>
-                        </ul>
-                    </div>
-                    <!-- blog-sidebar-wrap end -->
+                   
                     <!-- blog-sidebar-wrap start -->
                     <div class="blog-sidebar-wrap">
                         <div class="sidebar-title">
@@ -249,20 +229,7 @@
                         </form>
                     </div>
                     <!-- blog-sidebar-wrap end -->
-                    <!-- blog-sidebar-wrap start -->
-                    <div class="blog-sidebar-wrap">
-                        <div class="sidebar-title">
-                            <h2>Recent Posts</h2>
-                        </div>
-                        <ul class="single-categories-blog">
-                            <li><a href="#">Post With Audio</a></li>
-                            <li><a href="#">Blog image post</a></li>
-                            <li><a href="#">Post with Gallery</a></li>
-                            <li><a href="#">Post with Video</a></li>
-                            <li><a href="#">Maecenas ultricies</a></li>
-                        </ul>
-                    </div>
-                    <!-- blog-sidebar-wrap end -->
+                   
                     <!-- blog-sidebar-wrap start -->
                     <div class="blog-sidebar-wrap">
                         <div class="sidebar-title">

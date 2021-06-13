@@ -35,15 +35,24 @@ namespace BolShpping.Controllers
         [HttpGet]
         public async Task<JsonResult> Filter(int id, int sizeID, int fromPrice, int toPrice)
         {
+            List<Product> filter = null;
             if (id == 0 && sizeID == 0)
             {
+                filter = await _context.Products.Where(p =>
+                                        ((fromPrice != 0 && p.Price >= fromPrice && toPrice == 0) ||
+                                         (toPrice != 0 && p.Price <= toPrice && fromPrice == 0) ||
+                                         (toPrice == 0 && fromPrice == 0) ||
+                                         (fromPrice != 0 && toPrice != 0 && p.Price >= fromPrice && p.Price <= toPrice))).ToListAsync();
                 return Json(new
                 {
-                    status = 404
+                    status = 200,
+                    filterInfo = filter,
+
+                    //productImages = productImages
+
                 });
             }
 
-            List<Product> filter = null;
 
             var category = await _context.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
             var size = _context.Products.Where(p => p.Id == sizeID).FirstOrDefault();

@@ -27,6 +27,8 @@ namespace BolShpping.Models.DAL
         public DbSet<File> Files { get; set; }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Contact> Contacts  { get; set; }
+        public DbSet<SendMessage> SendMessages { get; set; }
+
 
 
     }

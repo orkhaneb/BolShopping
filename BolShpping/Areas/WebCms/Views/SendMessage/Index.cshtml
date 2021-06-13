@@ -1,0 +1,75 @@
+﻿@model IEnumerable<BolShpping.Models.BLL.SendMessage>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 my-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-4">
+                Appeals
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-shorting" id="dataTable">
+                        <thead>
+                            <tr>
+
+                                <th>Name</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+                                <th>Subject</th>
+                                <th>Description</th>
+                                <th>Detalis & Delete</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr data-id="@item.Id">
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Subjet)
+                                </td>
+                                <td width="230">
+                                    @if (item.Message.Length > 40)
+                                    {
+                                        @Html.Raw(item.Message.Substring(0, 40) + "...")
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(item.Message)
+                                    }
+                                </td>
+
+                                <td>
+                                    <a asp-action="MoreDetailed" asp-route-id="@item.Id" class="btn text-primary"><img src="https://img.icons8.com/officexs/30/000000/details-pane.png" /></a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn text-danger" onclick="return confirm('Are you sure you want to delete it')"><i class="fas fa-fw fa-trash"></i></a>
+                                </td>
+                            </tr>
+
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/main.js"></script>
+
+}

@@ -1,4 +1,4 @@
-﻿
+﻿@model BolShpping.Models.VM.ViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_SecondLayout.cshtml";
@@ -30,28 +30,28 @@
                         <div class="contact-title">
                             <h3>TELL US YOUR PROJECT</h3>
                         </div>
-                        <form id="contact-form" action="email.php" method="POST">
+                        <form id="contact-form"  asp-action="Index" method="post" enctype="multipart/form-data">
                             <div class="contact-page-form">
                                 <div class="contact-input">
                                     <div class="contact-inner">
-                                        <input name="name" type="text" placeholder="First Name *" id="first-name">
+                                        <input asp-for="SendMessage.Name" type="text" placeholder="First Name *" id="first-name">
                                     </div>
                                     <div class="contact-inner">
-                                        <input name="lastname" type="text" placeholder="Last Name *" id="last-name">
+                                        <input asp-for="SendMessage.LastName" type="text" placeholder="Last Name *" id="last-name">
                                     </div>
                                     <div class="contact-inner">
-                                        <input type="text" placeholder="Email *" id="email" name="email">
+                                        <input type="text" placeholder="Email *" id="email" asp-for="SendMessage.Email">
                                     </div>
                                     <div class="contact-inner">
-                                        <input name="subject" type="text" placeholder="Subject *" id="subject">
+                                        <input asp-for="SendMessage.Subjet" type="text" placeholder="Subject*" id="subject">
                                     </div>
                                     <div class="contact-inner contact-message">
-                                        <textarea name="message" placeholder="Message *"></textarea>
+                                        <textarea asp-for="SendMessage.Message" placeholder="Message *"></textarea>
                                     </div>
                                 </div>
                                 <div class="contact-submit-btn">
-                                    <button class="submit-btn" type="submit">Send Email</button>
-                                    <p class="form-messege"></p>
+                                    <button class="submit-btn" type="submit">Send Message</button>
+                                   
                                 </div>
                             </div>
                         </form>
@@ -61,21 +61,21 @@
             <div class="col-lg-5 col-sm-12">
                 <div class="contact-infor mt-100">
                     <div class="contact-title">
-                        <h3>CONTACT US</h3>
+                        <h3>@Model.Contacts.FirstOrDefault().Title</h3>
                     </div>
                     <div class="contact-dec">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam nam ex odio expedita, officia temporibus ipsum, placeat magni quibusdam sint, atque distinctio </p>
+                        <p>@Model.Contacts.FirstOrDefault().Description </p>
                     </div>
                     <div class="contact-address">
                         <ul>
-                            <li><i class="fa fa-fax"> </i> Address : No 40 Baria Sreet 133/2 NewYork City</li>
-                            <li><i class="fa fa-phone">&nbsp;</i> Infor@chairman.com</li>
-                            <li><i class="fa fa-envelope-o">&nbsp;</i> 0(1234) 567 890</li>
+                            <li><i class="fa fa-fax"> </i> @Model.Contacts.FirstOrDefault().Addres</li>
+                            <li><i class="far fa-envelope"></i> @Model.Contacts.FirstOrDefault().Email</li>
+                            <li><i class="fas fa-phone-volume"></i> @Model.Contacts.FirstOrDefault().Number</li>
                         </ul>
                     </div>
                     <div class="work-hours">
                         <h3><strong>Working hours</strong></h3>
-                        <p><strong>Monday &ndash; Saturday</strong>: &nbsp;08AM &ndash; 22PM</p>
+                        <p>@Model.Contacts.FirstOrDefault().WorkingHourse</p>
                     </div>
                 </div>
             </div>

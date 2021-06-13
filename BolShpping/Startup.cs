@@ -131,9 +131,7 @@ namespace BolShpping
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             //After the user has registered, the following must be connected in order for her name to appear when logged in.

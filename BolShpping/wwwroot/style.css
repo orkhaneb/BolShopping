@@ -2845,16 +2845,7 @@ body {
     margin: 10px 0;
 }
 
-.blog-titel.blog-image h1:before {
-    color: #fe5f38;
-    content: "";
-    display: inline-block;
-    font-family: "FontAwesome";
-    font-size: 26px;
-    margin-right: 20px;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
+
 
 .blog-titel h1 a {
     color: #333333;

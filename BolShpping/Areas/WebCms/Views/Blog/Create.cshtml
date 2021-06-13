@@ -1,0 +1,87 @@
+﻿@model BolShpping.Models.BLL.Blog
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/WebCms/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+<div class="col-md-12 my-4">
+    <div class="card shadow my-4">
+        <div class="card-header py-4">
+            Add Blog <a asp-action="Index" class="float-right btn btn-outline-secondary">Back to Index</a>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <fieldset class="radiogenel">
+                            <legend>Add Image</legend>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="image">image</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="hidden" name="category" value="">
+                                    <input type="file" class="custom-file-input imginput" id="image1" name="File" onchange="previewFile()">
+                                    <label class="custom-file-label" for="category">Choose file</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <img src="" id="img1" height="300" style="margin-bottom: 20px;" alt="no  image">
+
+                            </div>
+                        </fieldset>
+                     
+                        <div class="form-group">
+                            <label asp-for="@Model.Title" class="control-label"></label>
+                            <input type="text" asp-for="@Model.Title" id="Name" class="form-control" />
+                            <span   asp-validation-for="@Model.Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Description" class="control-label"></label>
+                            <textarea asp-for="@Model.Description" id="Name" class="form-control" style="height: 140px;"></textarea>
+                            <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label asp-for="@Model.UserName" class="control-label"></label>
+                            <input type="text" asp-for="@Model.UserName" id="Name" class="form-control" />
+                            <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                        </div>
+                      
+                        <div class="form-group">
+                            <label asp-for="@Model.DateTime" class="control-label">Date of production</label>
+                            <input type="date" asp-for="@Model.DateTime" id="datetimepicker" value="2021-04-08" class="form-control" />
+                            <span asp-validation-for="@Model.DateTime" class="text-danger"></span>
+                        </div>
+                      
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Add" id="btnAddModels" class="btn btn-success name" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        $('#datetimepicker').datetimepicker({
+
+            language: 'en-US',
+            format: 'dd-MM-yyyy'
+
+        });
+    </script>
+
+}
+
