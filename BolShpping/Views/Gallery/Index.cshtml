@@ -2,7 +2,7 @@
 @model ViewModel
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_SecondLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
@@ -131,7 +131,7 @@
                                                         </a>
                                                         <span class="label-sale">new</span>
                                                         <div class="product-action">
-                                                            <a href="#" class="add-to-cart-btn"><i class="icon fas fa-cart-plus"></i></a>
+                                                            <a href="#" class="add-to-cart-btn .addCart"><i class="icon fas fa-cart-plus"></i></a>
                                                             <a href="#" id="add-favourite" class="quick-view" data-id="@item.Id"><i class="far fa-heart"></i></a>
                                                             <a href="#" class="links-details"><i class="ion-clipboard"></i></a>
                                                         </div>
@@ -166,7 +166,7 @@
                                                     </a>
                                                     <span class="label-sale">new</span>
                                                     <div class="product-action">
-                                                        <a href="#" class="add-to-cart-btn"><i class="icon fas fa-cart-plus"></i></a>
+                                                        <a href="#" class="add-to-cart-btn .addCart"><i class="icon fas fa-cart-plus"></i></a>
                                                         <a href="#" id="add-favourite" class="quick-view" data-id="@item.Id"><i class="far fa-heart"></i></a>
                                                         <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
                                                     </div>
@@ -374,6 +374,43 @@
                 })
             })
 
+            $(document).on("click", ".addCart", function (e) {
+                e.preventDefault();
+                let id = $(this)[0].id;
+                console.log(id)
+                let quantity = 1;
+                console.log(quantity)
+
+
+                $.ajax({
+                    url: "/Home/AddBasket/",
+                    method: "POST",
+                    data: { id: id, quantity: quantity },
+                    dataType: "json",
+                    success: function myfunction(response) {
+                        console.log(response.status)
+
+                        if (response.status === 200) {
+                            swal({
+                                title: "Basket",
+                                text: "Məhsulunuz səbətiniz-ə əlavə olundu",
+                                icon: "success",
+                            });
+                            setTimeout(function () { location.reload(); }, 1700);
+
+                        }
+                        else if (response.status === 404) {
+                            swal({
+                                title: "Basket",
+                                text: "Bu Məhsul artıq səbətinizdə var",
+                                icon: "warning",
+                            });
+                        }
+
+                    }
+
+                })
+            })
         })
     </script>
 

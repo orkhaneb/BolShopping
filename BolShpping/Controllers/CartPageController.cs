@@ -50,11 +50,24 @@ namespace BolShpping.Controllers
                 await _context.SaveChangesAsync();
             }
 
-
             return Json(new
             {
                 status = 200
 
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveBasket(int id)
+        {
+            var cart = await _context.Carts.FindAsync(id);
+
+            _context.Carts.Remove(cart);
+            await _context.SaveChangesAsync();
+
+            return Json(new
+            {
+                data = cart
             });
         }
 

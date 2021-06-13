@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using BolShpping.Models.BLL;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity;
 
 namespace BolShpping.Controllers
 {
@@ -19,12 +20,15 @@ namespace BolShpping.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly MyContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
 
-        public HomeController(ILogger<HomeController> logger, MyContext context)
+
+        public HomeController(ILogger<HomeController> logger, MyContext context, UserManager<AppUser> userManager)
         {
             _logger = logger;
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -54,6 +58,14 @@ namespace BolShpping.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBasket(int id, int quantity = 1)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Json(new
+                {
+                    status = 400                   
+                });
+            }
+
             Cart cart = null;
             if (id != 0)
             {
@@ -72,12 +84,16 @@ namespace BolShpping.Controllers
                 }
                 var product = await _context.Products.FindAsync(id);
                 var productQuantity = quantity * product.Price;
+                string appUserId = _userManager.GetUserId(HttpContext.User);
+
                 cart = new Cart()
                 {
                     Product = product,
                     ProductId = id,
                     Quantity = quantity,
-                    SubTotalPrice = productQuantity
+                    SubTotalPrice = productQuantity,
+                    AppUserId = appUserId
+                    
                 };
                 await _context.Carts.AddAsync(cart);
                 await _context.SaveChangesAsync();
@@ -97,7 +113,7 @@ namespace BolShpping.Controllers
         {
             List<Favourite> carts = new List<Favourite>();
 
-            var session = HttpContext.Session.GetString("ShoppingCart");
+            var session = HttpContext.Session.GetString("ShoppingFavourite");
 
             if (session != null)
             {

@@ -1,5 +1,6 @@
 ﻿using BolShpping.Models.BLL;
 using BolShpping.Models.DAL;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,9 +13,12 @@ namespace BolShpping.Controllers
     public class ProductDetailController : Controller
     {
         public readonly MyContext _context;
-        public ProductDetailController(MyContext context)
+        private readonly UserManager<AppUser> _userManager;
+
+        public ProductDetailController(MyContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         public async Task<IActionResult> Index(int id)
         {
@@ -27,6 +31,13 @@ namespace BolShpping.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBasket(int id, int quantity)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Json(new
+                {
+                    status = 400
+                });
+            }
             Cart cart = null;
             if (id != 0)
             {
@@ -45,12 +56,15 @@ namespace BolShpping.Controllers
                 }
                 var product = await _context.Products.FindAsync(id);
                 var productQuantity = quantity * product.Price;
+                string appUserId = _userManager.GetUserId(HttpContext.User);
                 cart = new Cart()
                 {
                     Product = product,
                     ProductId = id,
                     Quantity = quantity,
-                    SubTotalPrice = productQuantity
+                    SubTotalPrice = productQuantity,
+                    AppUserId = appUserId
+                    
                 };
                 await _context.Carts.AddAsync(cart);
                 await _context.SaveChangesAsync();

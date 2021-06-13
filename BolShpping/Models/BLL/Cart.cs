@@ -13,7 +13,7 @@ namespace BolShpping.Models.BLL
 
         //foreign key connection
         public int ProductId { get; set; }
-        public int UserId { get; set; }
+        public string AppUserId { get; set; }
 
         public virtual Product Product { get; set; }
         public virtual AppUser AppUser { get; set; }

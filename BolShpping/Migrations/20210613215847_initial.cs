@@ -337,19 +337,11 @@ namespace BolShpping.Migrations
                     Price = table.Column<decimal>(nullable: false),
                     DiscountPrice = table.Column<decimal>(nullable: false),
                     Color = table.Column<string>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: false),
-                    AppUserId = table.Column<int>(nullable: false),
-                    AppUserId1 = table.Column<string>(nullable: true)
+                    CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_AspNetUsers_AppUserId1",
-                        column: x => x.AppUserId1,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -398,7 +390,6 @@ namespace BolShpping.Migrations
                     Quantity = table.Column<int>(nullable: false),
                     SubTotalPrice = table.Column<decimal>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
                     AppUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -501,11 +492,6 @@ namespace BolShpping.Migrations
                 name: "IX_ProductImages_ProductId",
                 table: "ProductImages",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_AppUserId1",
-                table: "Products",
-                column: "AppUserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",

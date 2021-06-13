@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BolShpping.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210608061554_initial")]
+    [Migration("20210613215847_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -178,9 +178,6 @@ namespace BolShpping.Migrations
 
                     b.Property<decimal>("SubTotalPrice")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -353,12 +350,6 @@ namespace BolShpping.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AppUserId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -381,8 +372,6 @@ namespace BolShpping.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId1");
 
                     b.HasIndex("CategoryId");
 
@@ -626,10 +615,6 @@ namespace BolShpping.Migrations
 
             modelBuilder.Entity("BolShpping.Models.BLL.Product", b =>
                 {
-                    b.HasOne("BolShpping.Models.BLL.AppUser", "AppUser")
-                        .WithMany("Products")
-                        .HasForeignKey("AppUserId1");
-
                     b.HasOne("BolShpping.Models.BLL.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
