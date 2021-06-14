@@ -1,5 +1,5 @@
-﻿@using BolShpping.Models.BLL
-@model Product
+﻿@using BolShpping.Models.VM
+@model ViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -32,7 +32,7 @@
                         <div class="tab-content large-thum-image">
                             <div id="img-1" class="zoomWrapper single-zoom">
                                 <a href="#">
-                                    <img id="zoom1" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == Model.Id).FirstOrDefault().ImageCode" data-zoom-image="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == Model.Id).FirstOrDefault().ImageCode" alt="big-1">
+                                    <img id="zoom1" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == Model.Product.Id).FirstOrDefault().ImageCode" data-zoom-image="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == Model.Product.Id).FirstOrDefault().ImageCode" alt="big-1">
                                 </a>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                             @{ int i = 1;}
                             @foreach (var item in _context.ProductImages)
                             {
-                                if (Model.Id == item.ProductId)
+                                if (Model.Product.Id == item.ProductId)
                                 {
                                     <li>
                                         <a href="#" class="elevatezoom-gallery @(i == 1 ? "active" : "") " data-update="" data-image="~/img/@item.ImageCode" data-zoom-image="~/img/@item.ImageCode"><img src="~/img/@item.ImageCode" alt="zo-th-1" /></a>
@@ -58,13 +58,13 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="quick-view-content">
                         <div class="product-info">
-                            <h2>@Model.Name</h2>
+                            <h2>@Model.Product.Name</h2>
                             <div class="price-box">
-                                <span class="new-price">$@Model.Price</span>
-                                <span class="old-price">$@Model.DiscountPrice</span>
+                                <span class="new-price">$@Model.Product.Price</span>
+                                <span class="old-price">$@Model.Product.DiscountPrice</span>
                             </div>
                             <p>
-                                @Model.Description
+                                @Model.Product.Description
                             </p>
                             <form class="modal-cart">
                                 <div class="quantity">
@@ -75,16 +75,19 @@
                                 </div>
                             </form>
                             <div class="quick-add-to-cart">
-                                <button class="quick-add-to-btn addCart" id="@Model.Id">Add to cart</button>
+                                <button class="quick-add-to-btn addCart" id="@Model.Product.Id">Add to cart</button>
                             </div>
                         </div>
                         <div class="social-sharing">
                             <h4>Share</h4>
-                            <ul>
-                                <li class="facebook"><a target="_blank" href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="twitter"><a target="_blank" href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="googleplus"><a target="_blank" href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li class="pinterest"><a target="_blank" href="#"><i class="fa fa-pinterest"></i></a></li>
+                            <ul class="size-product">
+                                <b>Size:</b>
+                                <li>@Model.Product.Size</li>
+
+                            </ul>
+                            <ul class="color-product">
+                                <b>Color:</b>
+                                <li>@Model.Product.Color</li>
                             </ul>
                         </div>
                     </div>
@@ -96,7 +99,7 @@
                         <div class="discription-tab-menu">
                             <ul role="tablist" class="nav">
                                 <li class="active"><a href="#description" data-toggle="tab" class="active show">Description</a></li>
-                                <li><a href="#review" data-toggle="tab">Reviews (1)</a></li>
+                                @*<li><a href="#review" data-toggle="tab">Reviews (1)</a></li>*@
                             </ul>
                         </div>
 
@@ -105,12 +108,11 @@
                                 <div class="tab-pane fade in active show" id="description">
                                     <div class="description-content">
                                         <p>
-                                            iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts
-                                            from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.
+                                           @Model.Product.Description
                                         </p>
                                     </div>
                                 </div>
-                                <div id="review" class="tab-pane fade">
+                                @*<div id="review" class="tab-pane fade">
                                     <form class="form-review">
                                         <div class="review">
                                             <table class="table table-striped table-bordered table-responsive">
@@ -169,7 +171,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
                     </div>
@@ -188,123 +190,43 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="related-product-active owl-carousel">
-                                <div class="col">
-                                    <!-- single-product-wrap start -->
-                                    <div class="single-product-wrap">
-                                        <div class="product-thumbnail">
-                                            <a href="single-product.html"><img src="img/product/1.jpg" alt=""></a>
-                                            <span class="label-sale">new</span>
-                                            <span class="label-sale discount">-12%</span>
-                                            <div class="product-action">
-                                                <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                                <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                                <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+
+                            @foreach (var item in Model.Products)
+                            {
+                                @if (item.Id != Model.Product.Id)
+                                {
+                                    <div class="col-lg-4">
+
+
+
+                                        @*single-product-wrap start*@
+                                        <div class="single-product-wrap">
+                                            <div class="product-thumbnail">
+                                                <a href="single-product.html"><img src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == Model.Product.Id).FirstOrDefault().ImageCode" alt=""></a>
+                                                <span class="label-sale">new</span>
+                                                <span class="label-sale discount">-12%</span>
+                                                <div class="product-action">
+                                                    <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
+                                                    <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
+                                                    <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="product-content text-center">
-                                            <h3 class="product-name"><a href="single-product.html">@Model.Name</a></h3>
-                                            <div class="price-box">
-                                                <span class="old-price">$368.00</span>
-                                                <span class="new-price">$323.84</span>
+                                            <div class="product-content text-center">
+                                                <h3 class="product-name"><a href="single-product.html">@item.Name</a></h3>
+                                                <div class="price-box">
+                                                    <span class="old-price">$@item.DiscountPrice</span>
+                                                    <span class="new-price">$@item.Price</span>
+                                                </div>
                                             </div>
+
+                                            @*single-product-wrap end*@
                                         </div>
+
                                     </div>
-                                    <!-- single-product-wrap end -->
-                                </div>
-                                <div class="col">
-                                    <!-- single-product-wrap start -->
-                                    <div class="single-product-wrap">
-                                        <div class="product-thumbnail">
-                                            <a href="single-product.html"><img src="img/product/2.jpg" alt=""></a>
-                                            <span class="label-sale">new</span>
-                                            <span class="label-sale discount">-12%</span>
-                                            <div class="product-action">
-                                                <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                                <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                                <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content text-center">
-                                            <h3 class="product-name"><a href="single-product.html">imperdiet nunc</a></h3>
-                                            <div class="price-box">
-                                                <span class="old-price">$332.00</span>
-                                                <span class="new-price">$313.84</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-product-wrap end -->
-                                </div>
-                                <div class="col">
-                                    <!-- single-product-wrap start -->
-                                    <div class="single-product-wrap">
-                                        <div class="product-thumbnail">
-                                            <a href="single-product.html"><img src="img/product/3.jpg" alt=""></a>
-                                            <span class="label-sale">new</span>
-                                            <span class="label-sale discount">-12%</span>
-                                            <div class="product-action">
-                                                <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                                <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                                <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content text-center">
-                                            <h3 class="product-name"><a href="single-product.html">convallis sem</a></h3>
-                                            <div class="price-box">
-                                                <span class="old-price">$212.00</span>
-                                                <span class="new-price">$209.00</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-product-wrap end -->
-                                </div>
-                                <div class="col">
-                                    <!-- single-product-wrap start -->
-                                    <div class="single-product-wrap">
-                                        <div class="product-thumbnail">
-                                            <a href="single-product.html"><img src="img/product/4.jpg" alt=""></a>
-                                            <span class="label-sale">new</span>
-                                            <span class="label-sale discount">-12%</span>
-                                            <div class="product-action">
-                                                <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                                <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                                <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content text-center">
-                                            <h3 class="product-name"><a href="single-product.html">consequat lacus</a></h3>
-                                            <div class="price-box">
-                                                <span class="old-price">$200.00</span>
-                                                <span class="new-price">$120.00</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-product-wrap end -->
-                                </div>
-                                <div class="col">
-                                    <!-- single-product-wrap start -->
-                                    <div class="single-product-wrap">
-                                        <div class="product-thumbnail">
-                                            <a href="single-product.html"><img src="img/product/5.jpg" alt=""></a>
-                                            <span class="label-sale">new</span>
-                                            <span class="label-sale discount">-12%</span>
-                                            <div class="product-action">
-                                                <a href="#" class="add-to-cart-btn"><i class="icon ion-bag"></i></a>
-                                                <a href="#" class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"><i class="ion-search"></i></a>
-                                                <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content text-center">
-                                            <h3 class="product-name"><a href="single-product.html">Phasellus habitant</a></h3>
-                                            <div class="price-box">
-                                                <span class="old-price">$205.00</span>
-                                                <span class="new-price">$155.00</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single-product-wrap end -->
-                                </div>
-                            </div>
+                                }
+                            }
+
+
                         </div>
                     </div>
                 </div>
@@ -317,7 +239,7 @@
     @section Scripts{
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-        
+
 
         <script>
             $(document).on("click", ".addCart", function (e) {

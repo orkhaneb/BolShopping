@@ -1,5 +1,6 @@
 ﻿using BolShpping.Models.BLL;
 using BolShpping.Models.DAL;
+using BolShpping.Models.VM;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +25,15 @@ namespace BolShpping.Controllers
         {
             var singleProduct = await _context.Products.FindAsync(id);
 
+            ViewModel vm = new ViewModel()
+            {
+                Product = singleProduct,
+                Products = await _context.Products.Where(p => p.CategoryId == singleProduct.CategoryId).ToListAsync(),
+                Category = new Category()
+            };
+
             var modelid = _context.ProductImages?.Where(pi => pi.ProductId == singleProduct.Id).FirstOrDefault().ImageCode;
-            return View(singleProduct);
+            return View(vm);
         }
 
         [HttpPost]

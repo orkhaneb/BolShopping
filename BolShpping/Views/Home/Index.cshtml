@@ -131,6 +131,7 @@
             <div class="col-12">
                 <div class="tabs-categorys-list">
                     <ul class="nav" role="tablist">
+                        <li role="presentation"  class="tab-productmenu"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a></li>
                         @{ int tabcount = 0;}
                         @foreach (var item in Model.Categories)
                         {
@@ -153,7 +154,48 @@
         @foreach (var category in Model.Categories)
         {
 
-            
+        <div role="tabpanel" class="tab-pane" id="all">
+            <div class="row">
+                @*<div class="">*@
+                @foreach (var item in Model.Products)
+                {
+
+                    
+                        @*<div class="col">*@
+                        <!-- single-product-wrap start -->
+                        <div class="single-product-wrap col-lg-3">
+                            <div class="product-thumbnail">
+                                <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">
+                                    <img class="first-image" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
+                                </a>
+                                <span class="label-sale">new</span>
+                                <div class="product-action">
+                                    <a href="#" class="add-to-cart-btn addCart" id="@item.Id"><i class="icon fas fa-cart-plus"></i></a>
+                                    <a href="#" class="quick-view" id="add-favourite" data-id="@item.Id"><i class="far fa-heart"></i></a>
+                                    <a href="#" class="links-details"><i class="ion-clipboard"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-content text-center">
+                                <h3 class="product-name"><a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">@item.Name</a></h3>
+                                <div class="price-box">
+                                    <span class="old-price">$@item.DiscountPrice</span>
+                                    <span class="new-price">$@item.Price</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    
+                }
+
+
+
+
+
+                @*</div>*@
+            </div>
+        </div>
                 <div role="tabpanel" class="tab-pane" id="tabmenu@(++tabContentCount)">
                     <div class="row">
                         @*<div class="">*@
@@ -167,7 +209,7 @@
                                     <!-- single-product-wrap start -->
                                     <div class="single-product-wrap col-lg-3">
                                         <div class="product-thumbnail">
-                                            <a href="#">
+                                            <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">
                                                 <img class="first-image" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
                                             </a>
                                             <span class="label-sale">new</span>

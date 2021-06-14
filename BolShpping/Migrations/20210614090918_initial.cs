@@ -162,6 +162,23 @@ namespace BolShpping.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SendMessages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Subjet = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SendMessages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Sliders",
                 columns: table => new
                 {
@@ -552,6 +569,9 @@ namespace BolShpping.Migrations
 
             migrationBuilder.DropTable(
                 name: "Replies");
+
+            migrationBuilder.DropTable(
+                name: "SendMessages");
 
             migrationBuilder.DropTable(
                 name: "Sliders");
