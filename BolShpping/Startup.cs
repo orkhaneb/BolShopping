@@ -147,7 +147,7 @@ namespace BolShpping
 
                 endpoints.MapAreaControllerRoute(
                 name: "areas", "WebCms",
-                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                pattern: "{area:exists}/{controller=AdminHome}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
