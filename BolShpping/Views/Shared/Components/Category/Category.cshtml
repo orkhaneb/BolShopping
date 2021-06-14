@@ -1,0 +1,12 @@
+﻿@model IList<BolShpping.Models.BLL.Category>
+<ul class="sub_menu">
+    <li>
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li><a href="#">@item.Name</a></li>
+            }
+
+        </ul>
+    </li>
+</ul>

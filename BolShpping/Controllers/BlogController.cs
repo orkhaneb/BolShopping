@@ -40,6 +40,7 @@ namespace BolShpping.Controllers
             var modelid = _context.BlogImages?.Where(pi => pi.BlogId == singleBlog.Id).FirstOrDefault().ImageCode;
 
             var comments = await _context.Comments.Include(c => c.AppUser).OrderByDescending(c => c.DateTime).ToListAsync();
+            
             var replies = await _context.Replies.Include(r => r.AppUser).OrderByDescending(c => c.DateTime).ToListAsync();
             ViewModel vm = new ViewModel()
             {
@@ -54,6 +55,14 @@ namespace BolShpping.Controllers
         [HttpPost]
         public async Task<IActionResult> Comment(ViewModelComments comments)
         {
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Json(new
+                {
+                    status = 404
+                });
+            }
 
             if (!ModelState.IsValid)
             {
@@ -111,8 +120,16 @@ namespace BolShpping.Controllers
 
         }
 
+        [HttpPost]
         public async Task<IActionResult> ReplyComment(int id, ViewModelComments replyComment)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Json(new
+                {
+                    status = 404
+                });
+            }
 
             if (!ModelState.IsValid)
             {

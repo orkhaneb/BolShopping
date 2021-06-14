@@ -2,7 +2,7 @@
 @model ViewModel
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_SecondLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
@@ -70,14 +70,14 @@
                                         </select>
                                     </div>
 
-                                    <div class="product-short">
+                                    @*<div class="product-short">
                                         <p>Search from by price</p>
                                         <input type="number" id="fromPrice" name="name" value="" />
                                     </div>
                                     <div class="product-short">
                                         <p>Search to by price</p>
                                         <input type="number" id="toPrice" name="name" value="" />
-                                    </div>
+                                    </div>*@
                                 </div>
                                 <div class="shearch-part">
                                     <div class="product-short" style="margin-bottom: 17px;">
@@ -99,7 +99,7 @@
                                 <!-- product-short end -->
                                 <!-- product-view-mode start -->
                                 <div class="product-view-mode">
-                                    <p>There are 17 products.</p>
+                                    <p>There are @_context.Products.Count() products.</p>
                                     <!-- shop-item-filter-list start -->
                                     <ul role="tablist" class="nav shop-item-filter-list">
                                         <li role="presentation" class="active"><a href="#grid" aria-controls="grid" role="tab" data-toggle="tab" class="active show" aria-selected="true"><i class="fa fa-th"></i> <span>grid</span></a></li>
@@ -131,7 +131,7 @@
                                                         </a>
                                                         <span class="label-sale">new</span>
                                                         <div class="product-action">
-                                                            <a href="#" class="add-to-cart-btn"><i class="icon fas fa-cart-plus"></i></a>
+                                                            <a href="#" class="add-to-cart-btn .addCart"><i class="icon fas fa-cart-plus"></i></a>
                                                             <a href="#" id="add-favourite" class="quick-view" data-id="@item.Id"><i class="far fa-heart"></i></a>
                                                             <a href="#" class="links-details"><i class="ion-clipboard"></i></a>
                                                         </div>
@@ -166,7 +166,7 @@
                                                     </a>
                                                     <span class="label-sale">new</span>
                                                     <div class="product-action">
-                                                        <a href="#" class="add-to-cart-btn"><i class="icon fas fa-cart-plus"></i></a>
+                                                        <a href="#" class="add-to-cart-btn .addCart"><i class="icon fas fa-cart-plus"></i></a>
                                                         <a href="#" id="add-favourite" class="quick-view" data-id="@item.Id"><i class="far fa-heart"></i></a>
                                                         <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
                                                     </div>
@@ -252,15 +252,15 @@
 
                 $("div.products-list").empty();
                 $("div.shop-product-list-wrap").empty();
-                let fromPrice = $("#fromPrice").val();
-                let toPrice = $("#toPrice").val();
+                //let fromPrice = $("#fromPrice").val();
+                //let toPrice = $("#toPrice").val();
                 $('.loading-gif').addClass('active');
                 $("body").css({ "overflow": "hidden" });
 
                 $.ajax({
                     type: "GET",
                     url: "/Gallery/Filter",
-                    data: { id: id, sizeID: sizeID, fromPrice: fromPrice, toPrice: toPrice },
+                    data: { id: id, sizeID: sizeID},
                     dataType: "json",
                     contentType: "application/x-www-form-urlencoded; charset=utf-8",
                     success: function (res) {
@@ -374,6 +374,43 @@
                 })
             })
 
+            $(document).on("click", ".addCart", function (e) {
+                e.preventDefault();
+                let id = $(this)[0].id;
+                console.log(id)
+                let quantity = 1;
+                console.log(quantity)
+
+
+                $.ajax({
+                    url: "/Home/AddBasket/",
+                    method: "POST",
+                    data: { id: id, quantity: quantity },
+                    dataType: "json",
+                    success: function myfunction(response) {
+                        console.log(response.status)
+
+                        if (response.status === 200) {
+                            swal({
+                                title: "Basket",
+                                text: "Məhsulunuz səbətiniz-ə əlavə olundu",
+                                icon: "success",
+                            });
+                            setTimeout(function () { location.reload(); }, 1700);
+
+                        }
+                        else if (response.status === 404) {
+                            swal({
+                                title: "Basket",
+                                text: "Bu Məhsul artıq səbətinizdə var",
+                                icon: "warning",
+                            });
+                        }
+
+                    }
+
+                })
+            })
         })
     </script>
 

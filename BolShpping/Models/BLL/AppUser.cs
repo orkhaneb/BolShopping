@@ -12,7 +12,6 @@ namespace BolShpping.Models.BLL
         public string SurName { get; set; }
 
         //primary key connection
-        public virtual ICollection<Product> Products { get; set; }
 
     }
 }

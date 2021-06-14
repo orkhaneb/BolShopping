@@ -122,52 +122,18 @@
                                             <!-- logo-mid end -->
                                         </div>
                                         <div class="col-lg-4 col-md-3 order-1 order-md-3">
-                                            <!-- shoping-mini-cart-wrapper start -->
-                                            <div class="shoping-mini-cart-wrapper">
-                                                <div class="mini-cart">
-                                                    <a href="~/#">
-                                                        <i class="fas fa-shopping-bag"></i>
-                                                        <span class="item_count">2</span>
-                                                    </a>
-                                                    <div class="mini-cart-wrap">
-                                                        <ul>
-                                                            <li>
-                                                                <div class="img_content">
-                                                                    <a href="~/single-product.html"> <img src="~/img/cart/1.jpg" alt=""><span class="product-quantity">1x</span></a>
-                                                                </div>
-                                                                <div class="content-right">
-                                                                    <h3 class="product-name"><a href="~/single-product.html">imperdiet vel</a></h3>
-                                                                    <div class="price-box">
-                                                                        <span class="new-price">$323.84</span>
-                                                                    </div>
-                                                                    <a href="~/#"><i class="fa fa-remove pull-xs-left"></i></a>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="img_content">
-                                                                    <a href="~/single-product.html"> <img src="~/img/cart/2.jpg" alt=""><span class="product-quantity">1x</span></a>
-                                                                </div>
-                                                                <div class="content-right">
-                                                                    <h3 class="product-name"><a href="~/single-product.html">imperdiet nunc</a></h3>
-                                                                    <div class="price-box">
-                                                                        <span class="new-price">$323.84</span>
-                                                                    </div>
-                                                                    <a href="~/#"><i class="fa fa-remove pull-xs-left"></i></a>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="price_content">
-                                                            <p>Subtotal <span class="float-right">$647.68</span></p>
-                                                            <p>Shipping <span class="float-right">$7.00</span></p>
-                                                            <p>Taxes <span class="float-right">$0.00</span></p>
-                                                            <p>Total <span class="float-right">$654.68</span></p>
-                                                        </div>
-                                                        <div class="cart-checkout">
-                                                            <a href="~/checkout.html">checkout</a>
-                                                        </div>
-                                                    </div>
+
+                                            
+
+                                                @*<div class="favourite-heart"style="font-size: 30px; display:inline-block">
+                                                </div>*@
+                                                <!-- shoping-mini-cart-wrapper start -->
+                                                <div class="shoping-mini-cart-wrapper">
+                                                    <a style="font-size: 30px;" asp-controller="WishList" asp-action="Index"><i class="far fa-heart"></i></a>
+
+                                                    @(await Component.InvokeAsync("Cart"))
                                                 </div>
-                                            </div>
+                                         
                                             <!-- shoping-mini-cart-wrapper end  -->
                                         </div>
                                     </div>
@@ -191,18 +157,8 @@
                                                 <a asp-controller="Home" asp-action="index">Home</a>
                                             </li>
                                             <li>
-                                                <a href="~/shop.html">Category <i class="fa fa-angle-down"></i></a>
-                                                <ul class="sub_menu">
-                                                    <li>
-                                                        <ul>
-                                                            <li><a href="#">Man</a></li>
-                                                            <li><a href="#">Women</a></li>
-                                                            <li><a href="#">Kids Man</a></li>
-                                                            <li><a href="#">Kids Women</a></li>
-                                                            <li><a href="#">Accessories</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
+                                                <a href="#">Category <i class="fa fa-angle-down"></i></a>
+                                                @(await Component.InvokeAsync("Category"))
                                             </li>
 
                                             <li><a asp-controller="Gallery" asp-action="Index">Gallery</a></li>

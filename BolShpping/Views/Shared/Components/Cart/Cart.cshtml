@@ -1,0 +1,76 @@
+﻿    @using BolShpping.Models.VM
+@model ProductCartViewModel
+<div class="mini-cart">
+        <a href="~/#">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="item_count">@Model.CartsCount</span>
+        </a>
+        <div class="mini-cart-wrap">
+            <ul>
+                @foreach (var carts in Model.Carts)
+                {
+                    @foreach (var products in Model.Products)
+                    {
+                        @if (carts.ProductId == products.Id)
+                        {
+                            <li data-id="@products.Id">
+                                <div class="img_content">
+                                    <a href="~/single-product.html"> <img src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == products.Id).FirstOrDefault().ImageCode" alt=""><span class="product-quantity">1x</span></a>
+                                </div>
+                                <div class="content-right">
+                                    <h3 class="product-name"><a href="~/ProductDetail/Index/@carts.ProductId">@products.Name</a></h3>
+                                    <div class="price-box">
+                                        <span class="new-price">$@products.Price</span>
+                                    </div>
+                                    <a href="#"><i class="btn-remove fa fa-remove pull-xs-left"></i></a>
+                                </div>
+                            </li>
+                        }
+                    }
+                }
+
+            </ul>
+            <div class="price_content">
+                <p>Subtotal <span class="float-right">$@_context.Carts.Sum(c => c.SubTotalPrice)</span></p>
+              
+            </div>
+            <div class="cart-checkout">
+                <a href="~/CartPage/Index">checkout</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(document).on("click", ".btn-remove", function () {
+            console.log()
+            let id = this.parentElement.parentElement.parentElement.getAttribute("data-id")
+            //let id = $(this).parent().parent().data("id");
+            //console.log(id)
+
+            $.ajax({
+                url: "/CartPage/RemoveBasket/" + id,
+                method: "POST",
+                data: id,
+                dataType: "json",
+                success: function (response) {
+                    swal({
+                        title: "Basket",
+                        text: "Məhsulunuz səbətinizdən silindi",
+                        icon: "success",
+                    });
+
+                    setTimeout(function () { location.reload(); }, 1700);
+                }
+
+            })
+        })
+    })
+</script>

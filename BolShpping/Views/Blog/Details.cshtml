@@ -2,7 +2,7 @@
 @model ViewModel
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_SecondLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -90,7 +90,7 @@
                     <!-- single-blog-area end -->
                     <!-- comments-area  start -->
                     <div class="comments-area mt-80">
-                        <h4>3 comments</h4>
+                        <h4>@(_context.Comments.Count() + _context.Replies.Count()) comments</h4>
 
 
                         <ol class="commentlist">
@@ -104,13 +104,34 @@
                                         <div class="comment-info">
                                             <a href="#">@item.AppUser?.Name @item.AppUser?.SurName</a>
                                             <div class="reply">
-                                                <a href="#" id="replyComment">Reply</a>
+                                                @*<a href="#"  data-reply-id="@item.Id">Reply</a>*@
                                             </div>
                                             <span class="date">@DateTime.Now</span>
                                             <p>@item.Message</p>
+
+                                            <ol class="currentReplyComment">
+                                                @foreach (var reply in Model?.Replies.Where(r => r.CommentId == item.Id))
+                                                {
+                                                    <li>
+                                                        <div class="single-comment">
+                                                            <div class="comment-avatar img-full">
+                                                                <img alt="" src="">
+                                                            </div>
+                                                            <div class="comment-info">
+                                                                <a href="#">@reply.Name</a>
+
+                                                                <span class="date">@DateTime.Now</span>
+                                                                <p>@reply.Message</p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                }
+                                            </ol>
                                         </div>
 
-                                        <div class="replyArea" style="display:none">
+                                        
+
+                                        <div class="replyArea" data-reply-id="@item.Id">
                                             <div class="comments-area comments-reply-area">
                                                 <div class="row">
                                                     <div class="col-lg-12">
@@ -136,7 +157,7 @@
                                                             </p>
                                                         </div>
                                                         <div class="comment-form-submit">
-                                                            <input type="submit" class="reply-submit" value="Post Comment">
+                                                            <input type="submit" data-reply-id="@item.Id" class="reply-submit" value="Post Comment">
                                                         </div>
                                                         @*</form>*@
                                                     </div>
@@ -145,29 +166,12 @@
 
                                         </div>
                                     </div>
-                                    <ol class= "currentReplyComment">
-                                        @foreach (var reply in Model?.Replies)
-                                        {
-                                            <li>
-                                                <div class="single-comment">
-                                                    <div class="comment-avatar img-full">
-                                                        <img alt="" src="">
-                                                    </div>
-                                                    <div class="comment-info">
-                                                        <a href="#">@reply.Name</a>
-
-                                                        <span class="date">@DateTime.Now</span>
-                                                        <p>@reply.Message</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        }
-                                    </ol>
+                                    
                                 </li>
                             }
                         </ol>
 
-                        
+
 
 
 
@@ -181,28 +185,28 @@
                                 <div class="col-lg-12">
                                     <h3 class="comment-reply-title">Comment</h3>
                                     @*<form class="comment-form-area" action="#">*@
-                                        <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
-                                        <p class="comment-form-comment">
-                                            <label>Comment</label>
-                                            <textarea id="comment-message" required="required"></textarea>
+                                    <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
+                                    <p class="comment-form-comment">
+                                        <label>Comment</label>
+                                        <textarea id="comment-message" required="required"></textarea>
+                                    </p>
+                                    <div class="comment-input">
+                                        <p class="comment-form-author">
+                                            <label>Name <span class="required">*</span></label>
+                                            <input type="text" name="Name" id="comment-name" required="required">
                                         </p>
-                                        <div class="comment-input">
-                                            <p class="comment-form-author">
-                                                <label>Name <span class="required">*</span></label>
-                                                <input type="text" name="Name" id="comment-name" required="required">
-                                            </p>
-                                            <p class="comment-form-email">
-                                                <label>Email <span class="required">*</span></label>
-                                                <input type="text" name="email" id="comment-email" required="required">
-                                            </p>
-                                            <p class="comment-form-url">
-                                                <label>Website</label>
-                                                <input type="text" id="comment-website" name="url">
-                                            </p>
-                                        </div>
-                                        <div class="comment-form-submit">
-                                            <input type="button" class="comment-submit" value="Post Comment">
-                                        </div>
+                                        <p class="comment-form-email">
+                                            <label>Email <span class="required">*</span></label>
+                                            <input type="text" name="email" id="comment-email" required="required">
+                                        </p>
+                                        <p class="comment-form-url">
+                                            <label>Website</label>
+                                            <input type="text" id="comment-website" name="url">
+                                        </p>
+                                    </div>
+                                    <div class="comment-form-submit">
+                                        <input type="button" class="comment-submit" value="Post Comment">
+                                    </div>
                                     @*</form>*@
                                 </div>
                             </div>
@@ -272,106 +276,166 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    
+
 
     @*Comment script*@
-<script>
-    $(document).on("click", ".comment-submit", function (e) {
-        //e.preventDefault();
+    <script>
+        f = true;
+        $(document).on("click", "#replyComment", function (e) {
+            e.preventDefault();
 
-        var name = $("#comment-name").val();
-        var email = $("#comment-email").val();
-        var text = $("#comment-message").val();
-        var website = $("#comment-website").val();
-
-        var formData = new FormData();
-        formData.append("Name", name);
-        formData.append("Email", email);
-        formData.append("Text", text);
-        formData.append("Website", website);
-
-        $.ajax({
-            url: "/Blog/Comment",
-            type: "post",
-            data: formData,
-            dataType: "json",
-            cache: false,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-
-                if (response.status === 200) {
-                    console.log(response);
-
-                    let comment = `<li>
-                                    <div class="single-comment">
-                                        <div class="comment-avatar img-full">
-                                            <img alt="" src="">
-                                        </div>
-                                        <div class="comment-info">
-                                            <a href="#" >${response.data.name}</a>
-                                            <div class="reply">
-                                                <a href="#" id="replyComment">Reply</a>
-                                            </div>
-                                            <span class="date">${response.data.dateTime}</span>
-                                            <p>${response.data.message}</p>
-                                        </div>
-                                    </div>
-                                    <ol class= "currentReplyComment" data-id="${response.data.dateTime}">
+            console.log(this.parentElement.parentElement.nextElementSibling)
+            let btnReplyDataId = $(this).attr("data-reply-id");
+   let replyFormDataId = this.parentElement.parentElement.nextElementSibling.getAttribute("data-reply-id");
 
 
-
-                                    </ol>
-                                </li>  `
-
-                    $(".commentlist").prepend(comment);
-
+            if (btnReplyDataId == replyFormDataId) {
+                if (f == true) {
+                    this.parentElement.parentElement.nextElementSibling.style.display = "block";
+                    f = false;
                 }
-
-                if (response.status === 400) {
-                    swal({
-                        title: "Warning!",
-                        text: "Zəhmət olmasa qeydiyyatdan keçin!",
-                        icon: "warning",
-                        dangerMode: true,
-                    })
-                }
-            },
-            error: function (res) {
-                console.log(res)
-                if (res.status == 500) {
-                    swal({
-                        title: "Error!",
-                        text: res.error,
-                        icon: "warning",
-                        dangerMode: true,
-                    })
+                else {
+                    this.parentElement.parentElement.nextElementSibling.style.display = "none";
+                    f = true;
                 }
             }
 
+            //if (f == true) {
+            //    this.parentElement.parentElement.nextElementSibling.style.display = "block";
+            //    console.log("true")
+            //    //document.querySelector(".commentArea").style.display = "none";
+
+            //    f = false;
+            //}
+            //else {
+            //    this.parentElement.parentElement.nextElementSibling.style.display = "none";
+            //    console.log("false")
+            //    //document.querySelector(".commentArea").style.display = "block";
+
+            //    f = true;
+            //}
+
         })
 
-       
+
+        $(document).on("click", ".comment-submit", function (e) {
+            //e.preventDefault();
+
+            var name = $("#comment-name").val();
+            var email = $("#comment-email").val();
+            var text = $("#comment-message").val();
+            var website = $("#comment-website").val();
+
+            var formData = new FormData();
+            formData.append("Name", name);
+            formData.append("Email", email);
+            formData.append("Text", text);
+            formData.append("Website", website);
+
+            $.ajax({
+                url: "/Blog/Comment",
+                type: "post",
+                data: formData,
+                dataType: "json",
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+
+                    if (response.status === 200) {
+                        console.log(response);
+
+                        let comment = `<li>
+                                        <div class="single-comment">
+                                            <div class="comment-avatar img-full">
+                                                <img alt="" src="">
+                                            </div>
+                                            <div class="comment-info">
+                                                <a href="#" >${response.data.name}</a>
+                                                <div class="reply">
+                                                    <a href="#" id="replyComment">Reply</a>
+                                                </div>
+                                                <span class="date">${response.data.dateTime}</span>
+                                                <p>${response.data.message}</p>
+                                            </div>
+                                        </div>
+                                        <ol class= "currentReplyComment" >
 
 
 
-    });
-</script>
+                                        </ol>
+                                    </li>  `
+
+                        $(".commentlist").prepend(comment);
+
+                    }
+
+                    if (response.status === 400) {
+                        swal({
+                            title: "Warning!",
+                            text: "Məlumatları duzgun daxil edin!",
+                            icon: "warning",
+                            dangerMode: true,
+                        })
+                        return;
+                    }
+
+                    if (response.status === 404) {
+                        swal({
+                            title: "Warning!",
+                            text: "Zəhmət olmasa qeydiyyatdan keçin!",
+                            icon: "warning",
+                            dangerMode: true,
+                        })
+                        return;
+                    }
+                },
+                error: function (res) {
+                    console.log(res)
+                    if (res.status == 500) {
+                        swal({
+                            title: "Error!",
+                            text: res.error,
+                            icon: "warning",
+                            dangerMode: true,
+                        })
+                    }
+                }
+
+            })
+
+
+
+
+
+        });
+    </script>
 
     @*Reply Comment script*@
-<script>
-        $(document).on("click", ".post-reply-comment", function (event) {
+    <script>
+        $(document).on("click", ".reply-submit", function (event) {
+            event.preventDefault();
+            console.log(event.target.parentElement.parentElement.parentElement.parentElement.parentElement.previousElementSibling.children[4])
             var name = $("#reply-name").val();
             var email = $("#reply-email").val();
             var text = $("#reply-message").val();
-            let id = $(".currentReplyComment").data("id");
+            var website = $("#reply-website").val();
+            let id = this.getAttribute("data-reply-id");
 
+
+            console.log(name)
+            console.log(email)
+            console.log(text)
+            console.log(website)
+            console.log(id)
 
 
             var formData = new FormData();
             formData.append("Name", name);
             formData.append("Email", email);
             formData.append("Text", text);
+            formData.append("Website", website);
+
 
 
             $.ajax({
@@ -388,20 +452,20 @@
                     if (response.status === 200) {
 
                         let reply = `<li>
-                                                <div class="single-comment">
-                                                    <div class="comment-avatar img-full">
-                                                        <img alt="" src="">
-                                                    </div>
-                                                    <div class="comment-info">
-                                                        <a href="#">Emin</a>
+                                                    <div class="single-comment">
+                                                        <div class="comment-avatar img-full">
+                                                            <img alt="" src="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <a href="#">${response.data.appUser.name}</a>
 
-                                                        <span class="date"></span>
-                                                        <p>Reply</p>
+                                                            <span class="date">${response.data.dateTime}</span>
+                                                            <p>${response.data.message}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                                        `
-                        $(".currentReplyComment").after(reply);
+                                                </li>
+                                                            `
+                        $(".currentReplyComment").append(reply);
                         //$("#comment-reply-message").text('');
                         //console.log($(event.currentTarget).parent().prev().children())
                         //$(e.currentTarget).parent().before(reply);
@@ -410,10 +474,20 @@
                     if (response.status == 400) {
                         swal({
                             title: "Warning!",
+                            text: "Məlumatları duzgun daxil edin!",
+                            icon: "warning",
+                            dangerMode: true,
+                        })
+                        return;
+                    }
+                    if (response.status === 404) {
+                        swal({
+                            title: "Warning!",
                             text: "Zəhmət olmasa qeydiyyatdan keçin!",
                             icon: "warning",
                             dangerMode: true,
                         })
+                        return;
                     }
 
                 },
@@ -422,28 +496,11 @@
                 }
             })
         })
-</script>
 
-<script>
-    f = true;
-    $(document).on("click", "#replyComment", function (e) {
-        e.preventDefault();
-        if (f == true) {
-            this.parentElement.parentElement.nextElementSibling.style.display = "block";
-            console.log("true")
-            //document.querySelector(".commentArea").style.display = "none";
 
-            f = false;
-        }
-        else {
-            this.parentElement.parentElement.nextElementSibling.style.display = "none";
-            console.log("false")
-            //document.querySelector(".commentArea").style.display = "block";
 
-            f = true;
-        }
+    </script>
 
-    })
-</script>
+
 }
 
