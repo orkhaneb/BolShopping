@@ -126,8 +126,8 @@
                                                 <!-- single-product-wrap start -->
                                                 <div class="single-product-wrap mt-30">
                                                     <div class="product-thumbnail">
-                                                        <a href="#">
-                                                            <img class="first-image" style=" border-radius: 18px; height: 255px;" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
+                                                        <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">
+                                                            <img class="first-image" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
                                                         </a>
                                                         <span class="label-sale">new</span>
                                                         <div class="product-action">
@@ -279,7 +279,7 @@
                                                 <!-- single-product-wrap start -->
                                                 <div class="single-product-wrap mt-30">
                                                     <div class="product-thumbnail">
-                                                        <a href="#">
+                                                        <a href="/ProductDetail/Index/${res.filterInfo[i].id}">
                                                             <img class="first-image" src="/img/${res.filterInfo[i].productImages[0].imageCode}" alt="">
                                                         </a>
                                                         <span class="label-sale">new</span>
@@ -309,7 +309,7 @@
                                             <div class="col-lg-4 col-md-6">
                                                 <!-- product-thumbnail start -->
                                                 <div class="product-thumbnail">
-                                                    <a href="single-product.html">
+                                                    <a href="/ProductDetail/Index/${res.filterInfo[i].id}">
                                                         <img class="first-image" src="/img/${res.filterInfo[i].productImages[0].imageCode}" alt="">
                                                     </a>
                                                     <span class="label-sale">new</span>
