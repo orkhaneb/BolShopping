@@ -25,6 +25,7 @@ namespace BolShpping.Controllers
             ViewModel vm = new ViewModel
             {
                 Contacts = _context.Contacts.ToList(),
+                SendMessage = new SendMessage()
                
             };
             return View(vm);

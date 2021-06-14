@@ -70,14 +70,7 @@
                                         </select>
                                     </div>
 
-                                    @*<div class="product-short">
-                                        <p>Search from by price</p>
-                                        <input type="number" id="fromPrice" name="name" value="" />
-                                    </div>
-                                    <div class="product-short">
-                                        <p>Search to by price</p>
-                                        <input type="number" id="toPrice" name="name" value="" />
-                                    </div>*@
+                                  
                                 </div>
                                 <div class="shearch-part">
                                     <div class="product-short" style="margin-bottom: 17px;">
@@ -127,13 +120,13 @@
                                                 <div class="single-product-wrap mt-30">
                                                     <div class="product-thumbnail">
                                                         <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">
-                                                            <img class="first-image" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
+                                                            <img class="first-image" style="height:320px; border-radius:15px; " src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
                                                         </a>
                                                         <span class="label-sale">new</span>
                                                         <div class="product-action">
                                                             <a href="#" class="add-to-cart-btn .addCart"><i class="icon fas fa-cart-plus"></i></a>
                                                             <a href="#" id="add-favourite" class="quick-view" data-id="@item.Id"><i class="far fa-heart"></i></a>
-                                                            <a href="#" class="links-details"><i class="ion-clipboard"></i></a>
+                                                           
                                                         </div>
                                                     </div>
                                                     <div class="product-content text-center">
@@ -161,16 +154,16 @@
                                             <div class="col-lg-4 col-md-6">
                                                 <!-- product-thumbnail start -->
                                                 <div class="product-thumbnail">
-                                                    <a href="single-product.html">
-                                                        <img class="first-image" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
-                                                    </a>
-                                                    <span class="label-sale">new</span>
-                                                    <div class="product-action">
-                                                        <a href="#" class="add-to-cart-btn .addCart"><i class="icon fas fa-cart-plus"></i></a>
-                                                        <a href="#" id="add-favourite" class="quick-view" data-id="@item.Id"><i class="far fa-heart"></i></a>
-                                                        <a href="single-product.html" class="links-details"><i class="ion-clipboard"></i></a>
-                                                    </div>
-                                                </div>
+                                                        <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">
+                                                            <img class="first-image" style="height:320px; border-radius:15px;" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
+                                                        </a>
+                                                        <span class="label-sale">new</span>
+                                                        <div class="product-action">
+                                                            <a href="#" class="add-to-cart-btn .addCart"><i class="icon fas fa-cart-plus"></i></a>
+                                                            <a href="#" id="add-favourite" class="quick-view" data-id="@item.Id"><i class="far fa-heart"></i></a>
+
+                                                        </div>
+</div>
                                                 <!-- product-thumbnail end -->
                                             </div>
                                             <div class="col-lg-8 col-md-6">

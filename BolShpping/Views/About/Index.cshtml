@@ -26,13 +26,13 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="about-us-img">
-                    <img src="~/img/@_context.Abouts.FirstOrDefault().ImageCode" alt="">
+                    <img src="~/img/@_context.Abouts.FirstOrDefault()?.ImageCode" alt="">
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="about-info-wrapper">
-                    <h2>@_context.Abouts.FirstOrDefault().Title</h2>
-                    <p>@_context.Abouts.FirstOrDefault().Description</p>
+                    <h2>@_context.Abouts.FirstOrDefault()?.Title</h2>
+                    <p>@_context.Abouts.FirstOrDefault()?.Description</p>
 
                 </div>
             </div>

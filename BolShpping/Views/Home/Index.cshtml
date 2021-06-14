@@ -53,24 +53,25 @@
 </div>
 <!-- slider-main-area end-->
 <!-- banner-area start -->
-<div class="banner-area">
-    <div class="container-fulid  p-0">
+<div class="our-barand-area">
+    <div class="container-fluid p-0">
         <div class="row no-gutters">
-            @foreach (var item in Model.Categories)
-            {
+            <div class="col">
+                <div class="our-brand-active owl-carousel">
+                    @foreach (var item in Model.Categories)
+                    {
 
-            <div class="col-lg-3 col-md-6">
-                <!-- singel-banner start -->
-                <div class="singel-banner border-all">
-                    <p style="position: absolute; z-index: 1111; font-size: 60px; font-family: sans-serif; font-weight: 800; color: orangered; padding-left: 20px;">@item.Name</p>
-                    <a href="#"><img style="height: 237px;" src="~/img/@item.ImageCode" alt=""></a>
-                </div>
-                <!-- singel-banner end -->
+                    <div style="padding:0px;" class="single-brand">
+                        <p style="position: absolute; z-index: 1111; font-size: 45px; font-family: sans-serif; font-weight: 800; color: orangered; padding-left: 20px;">@item.Name</p>
+                        <a href="#"><img style="height: 237px;" src="~/img/@item.ImageCode" alt=""></a>
+                    </div>
+                    }
+                    </div>
             </div>
-            }
         </div>
     </div>
 </div>
+
 <!-- banner-area end -->
 <!-- product-area start -->
 <div class="product-two-area ptb-80">
@@ -115,13 +116,13 @@
                     <div class="single-product-wrap col-lg-3">
                         <div class="product-thumbnail">
                             <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">
-                                <img class="first-image" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
+                                <img class="first-image" style=" height: 256px; border-radius: 15px;" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
                             </a>
                             <span class="label-sale">new</span>
                             <div class="product-action">
                                 <a href="#" class="add-to-cart-btn addCart" id="@item.Id"><i class="icon fas fa-cart-plus"></i></a>
                                 <a href="#" class="quick-view" id="add-favourite" data-id="@item.Id"><i class="far fa-heart"></i></a>
-                                <a href="#" class="links-details"><i class="ion-clipboard"></i></a>
+                     
                             </div>
                         </div>
                         <div class="product-content text-center">
@@ -135,14 +136,13 @@
                 }
             </div>
         </div>
-        @{ int tabContentCount = 0;}
-        @foreach (var category in Model.Categories)
+           @{ int tabContentCount = 0;}
+         @foreach (var category in Model.Categories)
         {
 
 
                 @*</div>*@
-            </div>
-        </div>
+        
                 <div role="tabpanel" class="tab-pane" id="tabmenu@(++tabContentCount)">
                     <div class="row">
                         @*<div class="">*@
@@ -157,13 +157,13 @@
                                     <div class="single-product-wrap col-lg-3">
                                         <div class="product-thumbnail">
                                             <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">
-                                                <img class="first-image" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
+                                                <img class="first-image" style=" height: 256px; border-radius: 15px;" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
                                             </a>
                                             <span class="label-sale">new</span>
                                             <div class="product-action">
                                                 <a href="#" class="add-to-cart-btn addCart" id="@item.Id"><i class="icon fas fa-cart-plus"></i></a>
                                                 <a href="#" class="quick-view" id="add-favourite" data-id="@item.Id"><i class="far fa-heart"></i></a>
-                                                <a href="#" class="links-details"><i class="ion-clipboard"></i></a>
+                                             
                                             </div>
                                         </div>
                                         <div class="product-content text-center">
@@ -179,24 +179,9 @@
 
                                 }
                             }
-
-
-
-
-
-                        @*</div>*@
                     </div>
                 </div>
             }
-        
-
-
-
-
-
-
-
-
         </div>
         <!-- tab-contnt end -->
     </div>

@@ -61,21 +61,21 @@
             <div class="col-lg-5 col-sm-12">
                 <div class="contact-infor mt-100">
                     <div class="contact-title">
-                        <h3>@Model.Contacts.FirstOrDefault().Title</h3>
+                        <h3>@Model.Contacts.FirstOrDefault()?.Title</h3>
                     </div>
                     <div class="contact-dec">
-                        <p>@Model.Contacts.FirstOrDefault().Description </p>
+                        <p>@Model.Contacts.FirstOrDefault()?.Description </p>
                     </div>
                     <div class="contact-address">
                         <ul>
-                            <li><i class="fa fa-fax"> </i> @Model.Contacts.FirstOrDefault().Addres</li>
-                            <li><i class="far fa-envelope"></i> @Model.Contacts.FirstOrDefault().Email</li>
-                            <li><i class="fas fa-phone-volume"></i> @Model.Contacts.FirstOrDefault().Number</li>
+                            <li><i class="fa fa-fax"> </i> @Model.Contacts.FirstOrDefault()?.Addres</li>
+                            <li><i class="far fa-envelope"></i> @Model.Contacts.FirstOrDefault()?.Email</li>
+                            <li><i class="fas fa-phone-volume"></i> @Model.Contacts.FirstOrDefault()?.Number</li>
                         </ul>
                     </div>
                     <div class="work-hours">
                         <h3><strong>Working hours</strong></h3>
-                        <p>@Model.Contacts.FirstOrDefault().WorkingHourse</p>
+                        <p>@Model.Contacts.FirstOrDefault()?.WorkingHourse</p>
                     </div>
                 </div>
             </div>
