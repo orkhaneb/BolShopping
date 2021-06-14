@@ -36,6 +36,8 @@ namespace BolShpping.Controllers
             var count = await _context.Products.ToListAsync();
             ViewModel vm = new ViewModel()
             {
+                Discountends = await _context.Discountends.ToListAsync(),
+                Sliders = await _context.Sliders.ToListAsync(),
                 Products = await _context.Products.Include(p => p.ProductImages).Include(p => p.Category).ToListAsync(),
                 Categories = await _context.Categories.ToListAsync()
             };

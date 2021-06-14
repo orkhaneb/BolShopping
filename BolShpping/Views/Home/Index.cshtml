@@ -43,75 +43,31 @@
 </div>
 <!-- our-service-section end -->
 <!-- slider-main-area start-->
-<div class="slider-main-area">
-    <div class="slider-active owl-carousel">
-        <!-- slider-wrapper start -->
-        <div class="slider-wrapper-3" style="background-image:url(img/slider/home-03-1.jpg)">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="slider-text-info style-4">
-                            <h2>NEW</h2>
-                            <h1><span>Fashion</span> <br><span class="font-width"> &</span> style</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- slider-wrapper end -->
-        <!-- slider-wrapper start -->
-        <div class="slider-wrapper-3" style="background-image:url(img/slider/home-03-2.jpg)">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 offset-lg-4">
-                        <div class="slider-text-info style-3 slider-text-animation">
-                            <h3 class="title-2">Introducing Our Favorite New Label</h3>
-                            <h1 class="title-1">Zara 70% off</h1>
-                            <p class="title-3">Feugiat eget dictum cum mollis a mi sem eu donec hac semper dapibus interdum cras cras ac parturient gravida libero vulputate suscipit a. </p>
-                            <div class="slier-btn">
-                                <a title="shop now" href="#" class="shop-btn">Shop now!</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- slider-wrapper end -->
-    </div>
+<div style="height:640px;" class="owl-carousel owl-theme owl-img-responsive">
+    @foreach (var item in Model.Sliders)
+    {
+
+    <div class="item"><img style=" height: 640px;" src="~/img/@item.ImageCode" alt="Alternate Text" /></div>
+    }
+    
 </div>
 <!-- slider-main-area end-->
 <!-- banner-area start -->
 <div class="banner-area">
     <div class="container-fulid  p-0">
         <div class="row no-gutters">
+            @foreach (var item in Model.Categories)
+            {
+
             <div class="col-lg-3 col-md-6">
                 <!-- singel-banner start -->
                 <div class="singel-banner border-all">
-                    <a href="#"><img src="~/img/benner/9.jpg" alt=""></a>
+                    <p style="position: absolute; z-index: 1111; font-size: 60px; font-family: sans-serif; font-weight: 800; color: orangered; padding-left: 20px;">@item.Name</p>
+                    <a href="#"><img style="height: 237px;" src="~/img/@item.ImageCode" alt=""></a>
                 </div>
                 <!-- singel-banner end -->
             </div>
-            <div class="col-lg-3 col-md-6">
-                <!-- singel-banner start -->
-                <div class="singel-banner border-all">
-                    <a href="#"><img src="~/img/benner/2.jpg" alt=""></a>
-                </div>
-                <!-- singel-banner end -->
-            </div>
-            <div class="col-lg-3 col-md-6 border-all">
-                <!-- singel-banner start -->
-                <div class="singel-banner">
-                    <a href="#"><img src="~/img/benner/5.jpg" alt=""></a>
-                </div>
-                <!-- singel-banner end -->
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <!-- singel-banner start -->
-                <div class="singel-banner border-all">
-                    <a href="#"><img src="~/img/benner/4.jpg" alt=""></a>
-                </div>
-                <!-- singel-banner end -->
-            </div>
+            }
         </div>
     </div>
 </div>
@@ -148,48 +104,48 @@
             int productCount = 0;
         }
         <!-- tab-contnt start -->
-    <div class="tab-content">
-        @{ int tabContentCount = 0;}
-        @foreach (var category in Model.Categories)
-        {
+        <div class="tab-content">
+            @{ int tabContentCount = 0;}
+            @foreach (var category in Model.Categories)
+            {
 
-            
+
                 <div role="tabpanel" class="tab-pane" id="tabmenu@(++tabContentCount)">
                     <div class="row">
                         @*<div class="">*@
-                            @foreach (var item in Model.Products)
-                            {
+                        @foreach (var item in Model.Products)
+                        {
 
-                                if (category.Name == item.Category.Name)
-                                {
-                                    ++productCount;
-                                    @*<div class="col">*@
-                                    <!-- single-product-wrap start -->
-                                    <div class="single-product-wrap col-lg-3">
-                                        <div class="product-thumbnail">
-                                            <a href="#">
-                                                <img class="first-image" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
-                                            </a>
-                                            <span class="label-sale">new</span>
-                                            <div class="product-action">
-                                                <a href="#" class="add-to-cart-btn addCart" id="@item.Id"><i class="icon fas fa-cart-plus"></i></a>
-                                                <a href="#" class="quick-view" id="add-favourite" data-id="@item.Id"><i class="far fa-heart"></i></a>
-                                                <a href="#" class="links-details"><i class="ion-clipboard"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content text-center">
-                                            <h3 class="product-name"><a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">@item.Name</a></h3>
-                                            <div class="price-box">
-                                                <span class="old-price">$@item.DiscountPrice</span>
-                                                <span class="new-price">$@item.Price</span>
-                                            </div>
+                            if (category.Name == item.Category.Name)
+                            {
+                                ++productCount;
+                                @*<div class="col">*@
+                                <!-- single-product-wrap start -->
+                                <div class="single-product-wrap col-lg-3">
+                                    <div class="product-thumbnail">
+                                        <a href="#">
+                                            <img class="first-image" src="~/img/@_context.ProductImages?.Where(pi => pi.ProductId == item.Id).FirstOrDefault().ImageCode" alt="">
+                                        </a>
+                                        <span class="label-sale">new</span>
+                                        <div class="product-action">
+                                            <a href="#" class="add-to-cart-btn addCart" id="@item.Id"><i class="icon fas fa-cart-plus"></i></a>
+                                            <a href="#" class="quick-view" id="add-favourite" data-id="@item.Id"><i class="far fa-heart"></i></a>
+                                            <a href="#" class="links-details"><i class="ion-clipboard"></i></a>
                                         </div>
                                     </div>
+                                    <div class="product-content text-center">
+                                        <h3 class="product-name"><a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@item.Id">@item.Name</a></h3>
+                                        <div class="price-box">
+                                            <span class="old-price">$@item.DiscountPrice</span>
+                                            <span class="new-price">$@item.Price</span>
+                                        </div>
+                                    </div>
+                                </div>
 
 
 
-                                }
                             }
+                        }
 
 
 
@@ -199,7 +155,6 @@
                     </div>
                 </div>
             }
-        
 
 
 
@@ -208,7 +163,8 @@
 
 
 
-    </div>
+
+        </div>
         <!-- tab-contnt end -->
     </div>
 </div>
@@ -217,27 +173,18 @@
 <div class="banner-area">
     <div class="container-fulid p-0">
         <div class="row no-gutters">
+            @foreach (var item in Model.Discountends)
+            {
+
             <div class="col-lg-4 col-md-4">
                 <!-- singel-banner start -->
                 <div class="singel-banner">
-                    <a href="#"><img src="~/img/benner/6.jpg" alt=""></a>
+                    <a href="#"><img style=" height: 475px;" src="~/img/@item.ImageCod" alt=""></a>
                 </div>
                 <!-- singel-banner end -->
             </div>
-            <div class="col-lg-4 col-md-4">
-                <!-- singel-banner start -->
-                <div class="singel-banner">
-                    <a href="#"><img src="~/img/benner/7.jpg" alt=""></a>
-                </div>
-                <!-- singel-banner end -->
-            </div>
-            <div class="col-lg-4 col-md-4">
-                <!-- singel-banner start -->
-                <div class="singel-banner">
-                    <a href="#"><img src="~/img/benner/8.jpg" alt=""></a>
-                </div>
-                <!-- singel-banner end -->
-            </div>
+            }
+         
         </div>
     </div>
 </div>
@@ -459,8 +406,13 @@
             })
         })
 
+        $('.owl-carousel').owlCarousel({
+            nav: true, // Show next and prev buttons
+            autoplaySpeed: 300,
+            navSpeed: 400,
+            items: 1
+        })
 
-       
     </script>
     @*.data("productId")*@
 }

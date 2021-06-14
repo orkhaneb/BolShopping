@@ -33,6 +33,10 @@ namespace BolShpping.Models.VM
 
         public IEnumerable<Contact> Contacts { get; set; }
         public SendMessage SendMessage  { get; set; }
+        public IEnumerable<Slider> Sliders { get; set; }
+        public IEnumerable<Discountend> Discountends { get; set; }
+
+
 
     }
 }
