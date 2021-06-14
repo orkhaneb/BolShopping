@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace BolShpping.Areas.WebCms.Controllers
 {
     [Area("WebCms")]
+    [Route("WebCms/")]
+
     [Route("WebCms/[controller]/[action]")]
     public class AdminHomeController : Controller
     {
