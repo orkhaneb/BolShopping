@@ -17,10 +17,13 @@ namespace BolShpping.Controllers
         {
             _context = context;
         }
+        //About index Function Start
         public async Task<IActionResult> Index()
         {
            
             return View(await _context.Abouts.ToListAsync());
         }
+        //About index Function end
+
     }
 }
